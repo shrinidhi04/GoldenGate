@@ -1,5 +1,3 @@
-![](images/100/image1.png)
-
 Update June 1, 2018
 
 ## Introduction
