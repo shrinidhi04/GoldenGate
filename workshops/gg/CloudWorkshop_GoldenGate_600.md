@@ -5,7 +5,7 @@ Update: May 17, 2018
 ## Data Transformations
 ## Introduction
 
-While the Oracle Cloud has greatly simplified DBA tasks, the DBA still has a role to play in the development and maintenance of DBCA instances.  This lab covers a few of the common DBA activities in a cloud environment.
+This lab covers data transformation during unidirectional replication using Oracle Goldengate micro services web interface.
 
 This lab supports the following use cases:
 -	Rapid creation and scaling of cloud databases.

@@ -5,7 +5,7 @@ Update: May 17, 2018
 ## Zero-Downtime Configuration
 ## Introduction
 
-While the Oracle Cloud has greatly simplified DBA tasks, the DBA still has a role to play in the development and maintenance of DBCA instances.  This lab covers a few of the common DBA activities in a cloud environment.
+This lab will take you step by step through zero downtime migration between two (2) oracle database schemas allowing data in the legacy database to remain available.
 
 This lab supports the following use cases:
 -	Rapid creation and scaling of cloud databases.
