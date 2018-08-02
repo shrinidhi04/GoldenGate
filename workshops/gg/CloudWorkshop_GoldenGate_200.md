@@ -154,16 +154,17 @@ Figure 7b-1:
 
 2.	Open the Distribution Server page for your first deployment (Figure 7b-2).
 Figure 7b-2:
+![](images/200/Lab200_image260.png) 
  
 3.	Click the plus sign ( + ) to add a new Distribution Path (Figure 7b-3).
 Figure 7b-3:
 
-![](images/200/Lab200_image260.png) 
+![](images/200/Lab200_image270.png) 
  
 4.	On the Add Path page, fill in the required information (Figure 7b-4).  Make note that the default protocol for distribution service is secure websockets (wss).  You will need to change this to websockets (ws).
 Figure 7b-4:
 
-![](images/200/Lab200_image270.png) 
+![](images/200/Lab200_image280.png) 
  
 Notice the drop down with the values WS, WSS, UDT and OGG.  These are the protocols you can select to use for transport.  Since you are setting up an unsecure uni-directional replication, make sure you select WS, then provide the following target information:
 Hostname: ogg123rs
@@ -175,7 +176,7 @@ After filling out the form, click Create and Run at the bottom of the page.
 5.	If everything works as expected, your Distribution Path should be up and running.  You should be able to see clearly the source and target on this page (Figure 7b-5).
 Figure 7b-5:
  
-![](images/200/Lab200_image280.png) 
+![](images/200/Lab200_image290.png) 
  
 Lab 7c: Configure Uni-Directional Replication (Receiver Server)
 
@@ -188,12 +189,12 @@ Steps:
 1.	Start from the Service Manager page for your second deployment (Figure 7c-1).
 Figure 7c-1:
  
-![](images/200/Lab200_image290.png) 
+![](images/200/Lab200_image300.png) 
 
 2.	Click on the Receiver Server link to open the Receiver Server page (Figure 7c-2).  Verify that everything is configured.
 Figure 7c-2:
 
-![](images/200/Lab200_image300.png) 
+![](images/200/Lab200_image310.png) 
 
  
 Lab 7d: Configure Uni-Directional Replication (Integrated Replicat)
@@ -207,34 +208,34 @@ Steps:
 1.	Starting from the Service Manager page (Figure 7d-1).
 Figure 7d-1:
  
-![](images/200/Lab200_image310.png) 
+![](images/200/Lab200_image320.png) 
  
 2.	Open the Administration Server for the second deployment by clicking on the link (Figure 7d-2).
 Figure 7d-2:
 
-![](images/200/Lab200_image320.png) 
+![](images/200/Lab200_image330.png) 
  
 3.	Open the Configuration option to add your credentials needed to connect to PDB2 (Figure 7d-3).  After creating the credential, login and verify that it works.
 You will need to create 1 credential for the user to connect to PDB2.  We will use the same common user as before, C##GGATE@PDB2, with password ggate.  Click Submit when finished.
 Figure 7d-3:
  
-![](images/200/Lab200_image330.png) 
+![](images/200/Lab200_image340.png) 
 
  
 4.	Navigate back to the Overview page on the Administration Server.  Here you will begin to create your Integrated Replicat (Figure 7d-4).  Click the plus sign ( + ) to open the Add Replicat process.
 Figure 7d-4:
  
-![](images/200/Lab200_image340.png) 
+![](images/200/Lab200_image350.png) 
 
 5.	With the Add Replicat page open, you want to create an Integrated Replicat.  Make sure the radio button is selected and click Next (Figure 7d-5).
 Figure 7d-5:
  
-![](images/200/Lab200_image350.png) 
+![](images/200/Lab200_image360.png) 
 
 6.	Fill in the Replicat options form with the required information (Figure 7d-6).  Your trail name should match the trail name you saw in the Receiver Server.  Once you are done filling everything out, click the Next button at the bottom of the screen.
 Figure 7d-6:
  
-![](images/200/Lab200_image360.png) 
+![](images/200/Lab200_image370.png) 
 
 7.	You are next taken to the Parameter File page.  On this page, you will notice that a sample parameter file is provided (Figure 7d-7).  You will have to remove the MAP statement and replace it with the information below:
 INSERTMISSINGUPDATES
