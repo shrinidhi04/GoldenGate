@@ -23,459 +23,192 @@ This lab supports the following use cases:
 -   Copy data using Database Links.
 
 ## Required Artifacts
+Lab 7a: Configure Uni-Directional Replication (Integrated Extract)
 
--   The following labs assume that the steps outlined in lab guide 100 have been completed.
+Objective:
 
--   The SSH tunnels must be active in a terminal window.
+This lab is in two parts.  The first part will setup the Integrated Extract for Oracle GoldenGate 12c Service Architecture for a uni-directional configuration using the SOE schema in PDB1 and PDB2. 
 
-# Cloud Migration Using Pluggable Databases
+Time: 25 minutes
 
-## Configure the Environment
-
-### **STEP 1**:  Open a **DBA Navigator** connection to the on-premise database
-
--   From the VNC Session desktop, locate and double-click on the **SQL Developer** icon. ***NOTE***: The first time SQL Developer is brought up; it may take some time to instantiate.
-
-	![](images/200/image3.png)
-
--   Double-click the **On-premises** folder to expand the list of database connections. Please note the pre-configured connections to the on-premises database.
-
-	![](images/200/image4.png)
-
--   Select the **View** -> **DBA** menu option from the top dropdown menu.
-
-	![](images/200/image5.png)
-
--   On the DBA tab, click the green plus icon to create a new connection.
-
-	**Note**: you may also right-click on Connections and select Add Connection.
-
-	![](images/200/image6.png)
-
--   Select the **sys - CDB** connection and click **OK**. 
-
-	**Note: sys - CDB** is an “on-premises” database located on the Virtual Box Image.
-
-	![](images/200/image7.png)
-
--   Expand the **sys - CDB connect**, and then expand the **Container Database** tree item. Click on the **ALPHAPDB** pluggable database to show the details for the pluggable database.
-
-	![](images/200/image8.png)
-
-## Clone the On-premise ALPHAPDB
-
-### **STEP 2**:  Clone the ALPHAPDB
-
--   In the DBA Navigator panel, right click on the ALPHAPDB pluggable database and select the Clone PDB... menu option.
-
-	![](images/200/image10.png)
-
--	Enter the following
-	- **Database Name:** `ALPHACLONE`
-	- **File Name Conversions:** `Customer Expressions` (note by default the directory name is derived from the database name - we are overriding this)
-	- **Click the + on the right**
-	- **Source File Pattern:** `alphapdb`
-	- **Target File Pattern:** `alphaclone`
-	- Then select the SQL table above
-
-	![](images/200/image11.png)
-
--	Since we have implemented TDE (Transparent Data Encryption) we need to override the SQL.  Select the SQL tab above and enter the following
-	- `keystore identified by oracle`
-
-	![](images/200/image12.png)
-
--	You should see the new PDB
-
-	![](images/200/image13.png)
-
--	Click on the ALPHACLONE database in the DBA navigator to see the status of the database.  Note: The cloned database shows an OPEN_MODE of MOUNTED indicating the database is plugged-in but is not open for access.
-
-	![](images/200/image14.png)
-
--	Click on the Data Files tab for the ALPHACLONE to review the data files created during the cloning operation.
-
-	![](images/200/image14.1.png)
-
-## Clone the ALPHACLONE DB to the Cloud
-
-### **STEP 3**:  Create SSH and SYS Database Cloud Connections
-
--   First we need to setup a SSH host connection to the Database Cloud Service instance. From the top menu select **View -> SSH** to display SSH hosts panel on the left.
-
-	![](images/200/image18.png)
-
--   Right click on **SSH Hosts** and select **New SSH Host**.
-
-	![](images/200/image20.png)
-
--   We will now configure an SSH connection to our DBCS instance
-
-	**Name**: `Alpha01A-DBCS`
-
-	**Host**: `<Database Image public IP you obtained in lab 100>`
-
-	**Username**: `oracle`
-	
-	![](images/200/image21.png)
-
--   Select **Use key file** and click **Browse...** Select file **/u01/OPCWorkshop/ci_opc_keys** and click **Open**.
-
-	![](images/200/image22.png)
-
--   Click **Add a Local Port Forward** and enter the following values:
-
-	**Name**: `Database`
-
-	**Host**: `<Database Image Public IP you obtained in lab 100>`
-	
--   Select **Use specific local port** and enter **1530**
-
-	**NOTE**: We are using port 1530 since 1521 is already in use for our local database.
-
-	![](images/200/image23.png)
-
--   Verify the configuration and click **OK**
-
--	Right click on the SSH connection and test.  You should see a message saying the connection was successful.
-
-	![](images/200/image17.png)
-
-	![](images/200/image16.png)
-
-### **STEP 4**:  Create a SQL Developer connection to the Public Cloud database SYS schema
-
--   Click the green plus sign ![](images/200/image24.png) in the **Connections** window to create a new connection; enter the following connection details:
-
-	**Connection Name**: 	`sys - OPCDBCS`
-
-	**Username**: 			`sys`
-
-	**Password**:			`Alpha2018_`
-
-	**Check** 				"Save Password"
-
-	**Optionally select a color for the connection**
-
-	**ConnectionType**: 	`SSH`
-
-	**Role**:				`SYSDBA`
-
-	**Service Name**: 		`ORCL.<Your ID Domain>.oraclecloud.internal`
-	
-	![](images/200/image25.png)
-
--   Click **Test** to confirm the information was entered correctly.
-
-	![](images/200/image26.png)
-
--   Click **Connect** to save the connection information which opens a new SQL Worksheet.
-
-	![](images/200/image27.png)
-
-### **STEP 5**:  Unplug ALPHACLONE
-
--	Since TDE requires additional commands that are not included in the generation of SQL within SQL Developer we will do step 5 in a terminal window.  Open a termainal window off the desktop.
-
-	![](images/200/image14.001.png)
-
--	Remove the auto-open wallet.  We will use the password wallet.  Enter the following commands
-	- `source dbenv.sh`
-	- `sqlplus sys/Alpha2018_ as sysdba`
-	- `shutdown immediate`
-	- `exit`
-	- `mv /u01/app/oracle/product/12.2/wallet/cwallet.sso /u01/app/oracle/product/12.2`
-	- `source dbenv.sh`
-	- `sqlplus sys/Alpha2018_ as sysdba`
-	- `startup`
-
-	![](images/200/image14.002.png)
-
--	Enter the following commands
-	- `alter pluggable database all open;`
-	- `administer key management set keystore open identified by oracle container=all;`
-	- `alter session set container=alphaclone;`
-	- `administer key management set keystore open force keystore identified by oracle;`
-	- `administer key management export encryption keys with secret "oracle" to '/u01/app/oracle/oradata/orcl/alphaclone/alphaclone.p12' identified by oracle;`
-	- `alter session set container=cdb$root;`
-	- `alter pluggable database alphaclone close;`
-	- `alter pluggable database alphaclone unplug into '/u01/app/oracle/oradata/orcl/alphaclone/alphaclone.xml';`
-
-	![](images/200/image14.003.png)
-
-
-### **STEP 6**:  Copy the data files of new cloned on-premise PDB to the Oracle Cloud
-
--	Exit out of SQL PLus and run the following commands.
-	- `exit;`
-	- `cd /u01/app/oracle/oradata/orcl/alphaclone`
-	- `tar -cvzf alphaclone.tar.gz *`
-
-	![](images/200/image14.004.png)
-
--	SSH into the Alpha01A-DBCS instance, create an alphaclone directory, and then copy the pluggable database to DBCS.
-	- `ssh -i /u01/OPCWorkshop/ci_opc_keys oracle@<Alpha01A-DBCS IP>`
-	- `mkdir /u02/app/oracle/oradata/ORCL/alphaclone`
-	- `exit`
-	- `scp -i /u01/OPCWorkshop/ci_opc_keys /u01/app/oracle/oradata/orcl/alphaclone/alphaclone.tar.gz oracle@<Alpha01A-DBCS IP>:/u02/app/oracle/oradata/ORCL/alphaclone`
-
-	![](images/200/image14.005.png)
-
--	Untar the files
-	- `ssh -i /u01/OPCWorkshop/ci_opc_keys oracle@<Alpha01A-DBCS IP>`
-	- `cd /u02/app/oracle/oradata/ORCL/alphaclone`
-	- `tar -xvzf alphaclone.tar.gz`
-
-	![](images/200/image14.006.png)
-
-### **STEP 7**:  Plug the cloned on-premise database to Oracle Cloud Database
-
--	Open Firefox on the Desktop and log into Enterprise Manager Express
-	- `https://localhost:5500/em`
-	- **User Name:** `sys`
-	- **Password:** `Alpha2018_`
-	- **Container Name:** leave blank
-	- check 'as sysdba'
-
-	![](images/200/image14.007.png)
-
--	Click on the CDB link.
-
-	![](images/200/image14.008.png)
-
--	Click on Plug
-
-	![](images/200/image14.009.png)
-
--	Enter Meetadata file, uncheck the 'Reuse source datafile' and enter the Source Datafile Location
-	- **Metadata File:** `/u02/app/oracle/oradata/ORCL/alphaclone/alphaclone.xml`
-	- **Source Datafile Location:** `/u02/app/oracle/oradata/ORCL/alphaclone`
-
-	![](images/200/image14.010.png)
-
-	![](images/200/image14.011.png)
-
--	Notice the pluggable database has a violation.  Click on this.
-
-	![](images/200/image14.012.png)
-
-	![](images/200/image14.013.png)
-
--	Cloud databases have TDE configured by default, but we need to import the alphapdb key.  Open a terminal window on the compute desktop and SSH into the Alpha01A-DBCS instance.
-	- `source dbenv.sh`
-	- `ssh -i /u01/OPCWorkshop/ci_opc_keys oracle@<Alpha01A-DBCS IP>`
-	- `sqlplus sys/Alpha2018_ as sysdba`
-	- `alter session set container = alphaclone;`
-	- `select * from v$encryption_wallet;`
-
-	![](images/200/image14.014.png)
-
--	Import keys
-	- `administer key management import keys with secret "oracle" from '/u02/app/oracle/oradata/ORCL/alphaclone/alphaclone.p12' force keystore identified by Alpha2018_ with backup;`
-
-	![](images/200/image14.015.png)
-
--	Review status of pluggable database in EM.  Open (or go back to) Firefox and log into IM:
-	- `https://localhost:5500/em`
-	- **User:** `sys`
-	- **password:** sys password
-
-	![](images/200/image14.016.png)
-
--	Navigate to containers.
-
-	![](images/200/image14.017.png)
-
--	Highlight the Alphapdb pluggable database (don't click on the link) and select action close.
-
-	![](images/200/image14.018.png)
-
-	![](images/200/image14.019.png)
-
--	Re-open alphapdb pdb
-
-	![](images/200/image14.020.png)
-
-	![](images/200/image14.021.png)
-
-	![](images/200/image14.022.png)
-
-	![](images/200/image14.023.png)
-
-### **STEP 8**:  Create a SQL Developer connection to the Public Cloud database ALPHAPDB schema
-
--   Back in SQL Developer, click the green plus sign ![](images/200/image24.png) in the Connections window to create a new connection; enter the following connection details:
-
-	
-	**Connection Name**:	`Alpha01A-DBCS`
-
-	**Username**:			`alpha`
-
-	**Password**:			`Alpha2018_`
-
-	**Check** "Save Password"
-
-	**Optionally select a color for the connection**
-
-	**ConnectionType**:		`SSH`
-
-	**Service Name**:		`alphaclone.<Your ID Domain>.oraclecloud.internal`
-	
-	
-	![](images/200/image55.png)
-
--   Click **Test** to confirm the information was entered correctly.
-
-	![](images/200/image56.png)
+Steps:
+1.	Open Firefox and login to the Service Manager using the Administrator account you setup during deployment (Figure 7a-1). Port number will vary depending on what you used during setup.
+http://ogg123rs:16000
+Figure 7a-1:
  
--   Click **Connect** to save the connection information and open a new SQL Worksheet.
+ 
+2.	After logging in, find and open the Administration Server for your first deployment.  In this example, the first deployment is Atlanta_1 (Figure 7a-2).  When the page is completely open, you should be at a page where you can see Extracts/Replicats clearly.
+Note: You will be required to login again.  Use the same Administrator account that was used with the Service Manager.
+Figure 7a-2:
+ 
+ 
+3.	Before you can create an Extract, you need to setup a credential alias for the GoldenGate user (C##GGATE).  This is done from the Configuration menu option in the grey bar on the left of the screen (Figure 7a-3).
+Figure 7a-3:
+ 
+ 
+ 
+4.	On the Configuration page, select the plus ( + ) sign to begin adding a credential.  At this point, you will be able to add a Credential Alias (Figure 7a-4).  You will need to add the alias for a user that will connect to CDB and PDB1.  The CDB alias will be used to connect to the database to read the required files for extraction operations, and the PDB1 user will be used to add TRANDATA to the schemas used in replication.
+Figure 7a-4:
+ 
+You will notice that a Domain name and Credential Alias were added along with the User ID and Password.  After adding the user to the credential store, you will reference it via its domain name and credential alias.
+You will need to create two (2) credential aliases for your Atlanta_1 deployment. The first credential will be for the CDB database and the second will be for the PDB1 database. The table below shows what needs to be added:
 
-	![](images/200/image57.png)
+Credential Domain	Credential Alias	UserID	Password
+SGGATE	SGGATE	C##GGATE@PDB1	ggate
+CDBGGATE	CDBGGATE	C##GGATE@CDB	ggate
 
-# Cloud Migration Using Data Pump: Schema Level
+ 
+5.	Verify that the credentials you just created work.  There is a little man icon under Action in the table.  Click on this for each Credential Alias and you should be able to login to the database (Figure 7a-5).
+Figure 7a-5:
+ 
+6.	Add SCHEMATRANDATA to the SOE schema using the SGGATE Credential Alias.  
+After logging into the database as described in step 5 for PDB1, find the Trandata section.  Click on the plus ( + ) sign and make sure that the radio button for Schema is selected (Figure 7a-6).  At this point, you provide the Schema Name, enable All Columns and Scheduling Columns, and click Submit.
+Figure 7a-6:
+ 
+You will notice that after you click Submit, there is no return message that states the operation was successful.  You can verify that SCHEMATRANDATA has been added by looking searching by Schema (Figure 7a-7).  To do this, click on the magnifying glass and provide the Schema name.
+Figure 7a-7:
+ 
+7.	Add the Protocol user.
+Since we are on the Credential screen, let’s go ahead and add a Protocol user.  A Protocol user is the user that the Distribution Server will use to communicate with the Receiver Server over an unsecure connection.
+As you did in Step 4, click the plus sign ( + ) next to the word Credentials.  Then provide the connection information needed (Figure 7a-8), notice that you will be using the Service Manager login in this credential.
+Figure 7a-8:
+ 
+For now, just leave this login alone.  It will be used in a later step. 
+8.	Add the Integrated Extract.
+Navigate back to the Overview page of the Administration Server (Figure 7a-9).  Then click on the plus sign ( + ) in the box for Extracts.
+Figure 7a-9:
+ 
+After clicking the plus sign ( + ), you are taken to the Add Extract page (Figure 7a-10).  Here you can choose from three different types of Extracts.  You will be installing an Integrated Extract.  Click Next.
+Figure 7a-10:
+ 
+ 
+The next page of the Add Extract process, is to provide the basic information for the Extract. Items required have a star ( * ) next to them.  Provide the required information and then click Next (Figure 7a-11).  Keep in mind that the credentials needed to register the Extract need to be against the CDB. Use the CDB domain and alias that you setup previously.
 
-## Export the Alpha Schema
+When using the CDB credential, at the bottom of the page, you will be presented with a box where you can select the PDB that will be used. This will only appear when you have a valid credential for the CDB.  Once you see this box, make sure you select PDB1. 
+Figure 7a-11:
 
-### **STEP 9**:  Create directory for datapump export
+  
+ 
 
--	Open a terminal window and run the following commands
-	- `source dbenv.sh`
-	- `sqlplus alpha/Alpha2018_@alphapdb`
-	- `create directory oracle as '/home/oracle';`
-	- `exit;`
+On the last page of the Add Extract process, you are presented with a parameter file (Figure 7a-12).  The parameter file is partially filled out, but missing the TABLE parameters. Insert the following list of TABLE parameter values into the parameter file.
+SOURCECATALOG PDB1
+TABLE SOE.ADDRESSES;
+TABLE SOE.CUSTOMERS;
+TABLE SOE.ORDERS;
+TABLE SOE.ORDER_ITEMS;
+TABLE SOE.CARD_DETAILS;
+TABLE SOE.LOGON;
+TABLE SOE.PRODUCT_INFORMATION;
+TABLE SOE.INVENTORIES;
+TABLE SOE.PRODUCT_DESCRIPTIONS;
+TABLE SOE.WAREHOUSES;
+TABLE SOE.ORDERENTRY_METADATA;
 
-	![](images/200/image58.png)
+Notes: ~/Desktop/Software/extract.prm has these contents for copying.
+Once the TABLE statements are added, click Create and Run at the bottom of the page.
+Figure 7a-12:
+ 
+ 
+The Administration Server page will refresh when the process is done registering the Extract with the database, and will show that the Extract is up and running (Figure 7a-13).
+Figure 7a-13:
+ 
+ 
+Lab 7b: Configure Uni-Directional Replication (Distribution Server)
 
-### **STEP 10**:  Run datapump export
+Objective:
+This lab will walk you through how to setup a Path within the Distribution Server.
 
--	Exit out of sqlplus and export the data
-	- `exit` if you are still in sqlplus, otherwise open a new command window and enter source dbenv.sh
-	- `expdp alpha/Alpha2018_@alphapdb directory=oracle dumpfile=alpha.dmp compression=all`
-	- Note that directory tmp was created previously for you and is mapped to /tmp.  Also we are compressing the export file on the fly to reduce the size for when we scp the file to DBCS.
+Time: 10 minutes
 
-	![](images/200/image59.png)
+Steps:
+1.	Start from the Service Manager page (Figure 7b-1).
+Figure 7b-1:
+ 
+2.	Open the Distribution Server page for your first deployment (Figure 7b-2).
+Figure 7b-2:
+ 
+3.	Click the plus sign ( + ) to add a new Distribution Path (Figure 7b-3).
+Figure 7b-3:
+ 
+4.	On the Add Path page, fill in the required information (Figure 7b-4).  Make note that the default protocol for distribution service is secure websockets (wss).  You will need to change this to websockets (ws).
+Figure 7b-4:
+ 
+ 
+Notice the drop down with the values WS, WSS, UDT and OGG.  These are the protocols you can select to use for transport.  Since you are setting up an unsecure uni-directional replication, make sure you select WS, then provide the following target information:
+Hostname: ogg123rs
+Port: <2nd deployment’s receiver server port>
+Trail File: <any two letter value>
+Domain: <credential you created in the Admin Server for WS>
+Alias: <credential you created in the Admin Server for WS>
+After filling out the form, click Create and Run at the bottom of the page.
+5.	If everything works as expected, your Distribution Path should be up and running.  You should be able to see clearly the source and target on this page (Figure 7b-5).
+Figure 7b-5:
+ 
 
-### **STEP 11**:  Copy the export Data Pump file to the server
+ 
+Lab 7c: Configure Uni-Directional Replication (Receiver Server)
 
--   Use the following secure copy (**scp**) command to transfer the Data Pump export to the DBCS server using your Database Service's Public IP address identified in Lab 100:
-	- `scp -i /u01/OPCWorkshop/ci_opc_keys /home/oracle/alpha.dmp oracle@{your public IP}:.`
+Objective:
+In this lab, you will configure the Receiver Server for the target database, which will receive the trail from the Distribution Path that you created on the source deployment.
 
-	![](images/200/image60.png)
+Time: 5 minutes
 
-### **STEP 12**:  Create a new schema to hold a copy of the data
+Steps:
+1.	Start from the Service Manager page for your second deployment (Figure 7c-1).
+Figure 7c-1:
+ 
+2.	Click on the Receiver Server link to open the Receiver Server page (Figure 7c-2).  Verify that everything is configured.
+Figure 7c-2:
+ 
+Lab 7d: Configure Uni-Directional Replication (Integrated Replicat)
 
--	Open a new terminal window (or use the current one) and enter the following commands that will SSH to the Alpha01A-DBCS instance, create an Oracle directory, and import the data.
-	- `ssh -i /u01/OPCWorkshop/ci_opc_keys oracle@{your public IP}` -- log into your remote DBCS instance
-	- `sqlplus system/Alpha2018_@pdb1;` -- log into system in the alphapdb
-	- `create user alpha2 identified by Alpha2018_;` -- create schema alpha2 (alpha already has the data from the previous lab)
-	- `grant dba to alpha2;`
-	- `connect alpha2/Alpha2018_@pdb1;` -- connect to alpha2 so we can create the oracle directory
-	- `create directory oracle as '/home/oracle';`
-	- `exit`
+Object:
+In this lab you will configure the Integrated Replicat for the second deployment.
 
--	![](images/200/image61.png)
+Time: 25 minutes
 
-### **STEP 13**:  Import the data
+Steps:
+1.	Starting from the Service Manager page (Figure 7d-1).
+Figure 7d-1:
+ 
+ 
+2.	Open the Administration Server for the second deployment by clicking on the link (Figure 7d-2).
+Figure 7d-2:
+ 
+ 
+3.	Open the Configuration option to add your credentials needed to connect to PDB2 (Figure 7d-3).  After creating the credential, login and verify that it works.
+You will need to create 1 credential for the user to connect to PDB2.  We will use the same common user as before, C##GGATE@PDB2, with password ggate.  Click Submit when finished.
+Figure 7d-3:
+ 
 
--	Import the data.  Run the following command in your terminal window.
-	- `impdp alpha2/Alpha2018_@pdb1 directory=oracle dumpfile=alpha.dmp remap_schema=alpha:alpha2`
+ 
+4.	Navigate back to the Overview page on the Administration Server.  Here you will begin to create your Integrated Replicat (Figure 7d-4).  Click the plus sign ( + ) to open the Add Replicat process.
+Figure 7d-4:
+ 
 
--	![](images/200/image62.png)
-
-# Cloud Migration Using Data Pump: Tablespace Level
-
-While datapump provides a very fast multi-threaded technique to move data quickly between Oracle Databases, it was not designed for very large volumes of data.  Transportable Tablespaces enable a database file copy technique that does not require an exported copy of the data, but instead allow you to copy the in-place data files to target, which using Datapump to capture the metadata only.
-
-## Export the euro Schema
-
-We will be exporting a GG (GoldenGate) tablespace, since there already is a users tablespace in the target database.
-
-### **STEP 14**:  Open euro in read/write mode and export the metadata
-
--	Open a terminal window and create an Oracle export directory and put the tablespace in read only mode.
-	- `source dbenv.sh`
-	- `sqlplus system/Alpha2018_@pdb1`
-	- `create directory oracle as '/home/oracle';`
-	- `alter tablespace gg read only;`
-
-	![](images/200/image63.png)
-
--	Export the data.  Enter the following commands in the terminal window.
-	- `exit`
-	- `expdp system/Alpha2018_@pdb1 directory=oracle dumpfile=ggtbs.dmp transport_tablespaces=gg exclude=statistics encryption_password=oracle logfile=full_tts_export.log`
-
-	![](images/200/image64.png)
-
-### **STEP 15**:  Copy the datafiles to the target DBCS instance
-
--	In the terminal window enter the following:
-	- `scp -i /u01/OPCWorkshop/ci_opc_keys /home/oracle/ggtbs.dmp oracle@<DBCS IP>:.` -- metadata
-	- `scp -i /u01/OPCWorkshop/ci_opc_keys /u01/app/oracle/oradata/orcl/pdb1/gg.dbf oracle@<DBCS IP>:.` -- datafiles
-
-	![](images/200/image66.png)
-
-### **STEP 16**:  Import the tablespace into the target DBCS instance
-
-We will be importing the data into the pdb1 instance.  First we'll need to drop the users tablespace since it already exists, then create an Oracle tmp directory, and then run the import.
-
--	SSH to the target DBCS instance, log in, and create euro user (must already exist in the target).
-	- `ssh -i /u01/OPCWorkshop/ci_opc_keys oracle@<DBCS IP>`
-	- `sqlplus system/Alpha2018_@pdb1`
-	- `create user euro identified by Alpha2018_;`
-	- `grant dba to euro;` 
-	- `create directory oracle as '/home/oracle';`
-
-	![](images/200/image67.png)
-
--	Exit from sqlplus and copy the ggtbs.dbf datafile to the pdb1 directory.
-	- `exit`
-	- `cp /home/oracle/gg.dbf /u02/app/oracle/oradata/ORCL/PDB1`
-
-	![](images/200/image68.png)
-
--	Import the data (note you will see some errors due to existence of some objects).
-	- `impdp system/Alpha2018_@pdb1 directory=oracle dumpfile=ggtbs.dmp logfile=full_tts_imp.log encryption_password=oracle transport_datafiles='/u02/app/oracle/oradata/ORCL/PDB1/gg.dbf'`
-
-	![](images/200/image69.png)
-
--	Confirm tablespace and contents exist by querying the Oracle dictionary.  Log into sqlplus and run the following query.
-	- `sqlplus system/Alpha2018_@pdb1`
-	- `select tablespace_name, count(*) from dba_tables group by tablespace_name;`
-
-	![](images/200/image70.png)
-
-# Cloud Migration Using Database Links (Table Level)
-
-Occasionally you just want to copy one or more tables from one database to another, and the easiest/quickest way to do that is to use a database link.  A database link connects two databases with sqlnet allowing you to reference remote tables in your local database.  This is good for table data, but other object types such as stored procedures, etc. cannot be replicated as easily.
-
-## Create a Database Link
-
-### **STEP 17**:  Create Database Link on the local system
-
--	Since we need to use tunnels to communicate with the remote DBCS instance when using ports other than 22 (which is open) we need to ensure our tunnels are still open (from lab 100).  In a terminal window enter the following
-	- `sudo su`
-	- `ps -ef|grep DBCS`
-
-	![](images/200/image71.png) -- if this is all you see then the tunnels are not open.  If you see the tunnels then no need for the next step
-
--	If you do need to re-establish the tunnels enter the following, and do NOT close the terminal window, just minimize it.
-	- `/u01/OPCWorkshop/lab/setssh.sh DBONLY` -- enter the DBCS IP address when prompted
-
--	Re-test tunnels - you should see this.
-
-	![](images/200/image72.png)
-
--	Log into SQLPlus in and create the database link.  Be sure to update this command with your Identity Domain.
-	- `source dbenv.sh`
-	- `sqlplus alpha/Alpha2018_@alphapdb;`
-	- `create database link alpha_dbcs.oracledemo.com connect to alpha2 identified by Alpha2018_ using '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1530))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=pdb1.<IDENTITY DOMAIN>.oraclecloud.internal)))';`
-	- `select sysdate from dual@alpha_dbcs.oracledemo.com;`
-
-	![](images/200/image73.png)
-
--	Copy a table from the remote DBCS to the local instance.  Note that you cannot create a remote table (DDL operation) on the remote server but you can do an insert operation.  First need alter the local users tablespace and make it read write.
-	- `create table mstars_local as select * from mstars@alpha_dbcs.oracledemo.com;`
-	- `insert into mstars@alpha_dbcs.oracledemo.com select * from mstars;`
-	- `commit;`
-
-	![](images/200/image74.png)
+5.	With the Add Replicat page open, you want to create an Integrated Replicat.  Make sure the radio button is selected and click Next (Figure 7d-5).
+Figure 7d-5:
+ 
+ 
+6.	Fill in the Replicat options form with the required information (Figure 7d-6).  Your trail name should match the trail name you saw in the Receiver Server.  Once you are done filling everything out, click the Next button at the bottom of the screen.
+Figure 7d-6:
+ 
+ 
+7.	You are next taken to the Parameter File page.  On this page, you will notice that a sample parameter file is provided (Figure 7d-7).  You will have to remove the MAP statement and replace it with the information below:
+INSERTMISSINGUPDATES
+MAP PDB1.SOE.CUSTOMERS, TARGET SOE.CUSTOMERS, KEYCOLS (CUSTOMER_ID);
+MAP PDB1.SOE.ADDRESSES, TARGET SOE.ADDRESSES, KEYCOLS (ADDRESS_ID);  
+MAP PDB1.SOE.ORDERS, TARGET SOE.ORDERS, KEYCOLS (ORDER_ID);
+MAP PDB1.SOE.ORDER_ITEMS, TARGET SOE.ORDER_ITEMS, KEYCOLS (ORDER_ID, LINE_ITEM_ID);
+MAP PDB1.SOE.CARD_DETAILS, TARGET SOE.CARD_DETAILS, KEYCOLS (CARD_ID);
+MAP PDB1.SOE.LOGON, TARGET SOE.LOGON;
+MAP PDB1.SOE.PRODUCT_INFORMATION, TARGET SOE.PRODUCT_INFORMATION;
+MAP PDB1.SOE.INVENTORIES, TARGET SOE.INVENTORIES, KEYCOLS (PRODUCT_ID, WAREHOUSE_ID);
+MAP PDB1.SOE.PRODUCT_DESCRIPTIONS, TARGET SOE.PRODUCT_DESCRIPTIONS;
+MAP PDB1.SOE.WAREHOUSES, TARGET SOE.WAREHOUSES;
+MAP PDB1.SOE.ORDERENTRY_METADATA, TARGET SOE.ORDERENTRY_METADATA;
+Notes: ~/Desktop/Software/replicat.prm has these contents for copying.
+Once the parameter file has been updated, click the Create and Run button at the bottom.
+Figure 7d-7:
+ 
+At this point, you should have a fully functional uni-directional replication environment. You can start Swingbench and begin testing.  See Appendix A for further instructions.
