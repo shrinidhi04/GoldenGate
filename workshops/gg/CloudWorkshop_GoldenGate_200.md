@@ -7,6 +7,8 @@ Update August 2, 2018
 
 This lab walk you through unidirectional and DDL replication between to database schemas using Goldengate 12.3 micro services web interface in a Ravello environment.
 
+![](images/200/Lab200_image104.png)
+
 This lab supports the following use cases:
 -	Migration of on-premise pluggable databases to a cloud based environment.
 -	Rapid creation of test or development pluggable database copies in the Cloud.
