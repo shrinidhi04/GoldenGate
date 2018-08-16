@@ -53,7 +53,7 @@ At this point, you should have a fully functional Admin Client environment.
 
 
 
-![](images/900/Lab900_image100.PNG)
+![](images/500/Lab502_image100.PNG)
 
 Update August 16, 2018
 
@@ -113,3 +113,19 @@ At this point you should see activity on the table by looking at the Extract/Rep
 Correct any problems that may arise due.
 
 At this point, you should have a fully functional REST Api environment. 
+
+
+
+![](images/500/Lab503_image100.PNG)
+
+Update August 16, 2018
+
+## Working with mySQL
+## Introduction
+
+In this lab, you will take a look at how to pull a list of services from Oracle GoldenGate using mySQL.
+
+Steps:
+1. Connect to mySQL using Putty
+
+![](images/500/Lab503_image101.png)
