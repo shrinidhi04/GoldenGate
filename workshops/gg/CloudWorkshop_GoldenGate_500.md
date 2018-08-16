@@ -1,11 +1,11 @@
 ![](images/500/Lab500_image100.PNG)
 
-Update August 13, 2018
+Update August 16, 2018
 
 ## CONNECT AND INTERACT WITH ADMINCLIENT
 ## Introduction
 
-In this lab, you will take a look at how to connect and interact with the AdminClient. using Goldengate 12.3 micro services web interface in a Ravello environment.
+In this lab, you will take a look at how to connect and interact with the Microservices AdminClient. using Goldengate 12.3 micro services web interface in a Ravello environment.
 
 
 Steps:
