@@ -1,6 +1,6 @@
 ![](images/500/Lab500_image100.PNG)
 
-Update August 2018
+Update August17 2018
 
 ## CONNECT AND INTERACT WITH ADMINCLIENT
 ## Introduction
@@ -9,7 +9,7 @@ In this lab, you will take a look at how to connect and interact with the Micros
 
 
 Steps:
-1. Open a command terminal (Figure 8-1).
+1. Open a command terminal.
 Right mouse click -> Open Terminal
 
 ![](images/500/Lab500_image101.png)
