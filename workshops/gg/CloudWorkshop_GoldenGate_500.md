@@ -1,6 +1,6 @@
 ![](images/500/Lab500_image100.PNG)
 
-Update August17 2018
+Update August 17th 2018
 
 ## CONNECT AND INTERACT WITH ADMINCLIENT
 ## Introduction
@@ -12,7 +12,7 @@ Steps:
 1. Open a command terminal.
 Right mouse click -> Open Terminal
 
-![](images/500/Lab500_image101.png)
+![](images/500/Lab500_image101.PNG)
 
 2. Navigate to the Oracle GoldenGate 12.3 Home /bin directory.
 cd /opt/app/oracle/product/12.3.0.1/oggcore_1/bin
