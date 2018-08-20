@@ -29,7 +29,9 @@ cd /opt/app/oracle/product/12.3.0.1/oggcore_1/bin
 4. Connect to Oracle GoldenGate without a deployment
 
 OGG 1> connect http://hostname:16000 as oggadmin password welcome1
-![](images/500/Lab500_image104a.png)
+
+![](images/500/Lab500_image105.PNG)
+
 
 Notice that you are not connected and that AdminClient provides you a list of deployment you can attempt to connect to.
 
