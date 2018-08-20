@@ -13,20 +13,19 @@ Steps:
 Right mouse click -> Open Terminal
 
 ![](images/500/Lab500_image101.PNG)
+
 ![](images/500/Lab500_image102.PNG)
 
-2. Navigate to the Oracle GoldenGate 12.3 Home /bin directory.
+2. Navigate to the Oracle GoldenGate 12.3 Home /bin directory
 cd /opt/app/oracle/product/12.3.0.1/oggcore_1/bin
 ![](images/500/Lab500_image103.png)
 
 3. Start the AdminClient.
  ./adminclient
-
 ![](images/500/Lab500_image104.png)
 
 4. Connect to Oracle GoldenGate without a deployment.
 OGG 1> connect http://hostname:16000 as oggadmin password welcome1
-
 ![](images/500/Lab500_image104.png)
 
 Notice that you are not connected and that AdminClient provides you a list of deployment you can attempt to connect to.
