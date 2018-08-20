@@ -32,19 +32,13 @@ OGG 1> connect http://hostname:16000 as oggadmin password welcome1
 
 ![](images/500/Lab500_image105.PNG)
 
-
 Notice that you are not connected and that AdminClient provides you a list of deployment you can attempt to connect to.
 
 5. Connect to an Oracle GoldenGate deployment.
-OGG 2> connect http://hostname:16000 as oggadmin password welcome1
+OGG 2> connect http://hostname:16000 deployment Atlanta_1 as oggadmin password welcome1
 
-![](images/500/Lab500_image105.png)
-
-Notice that you are not connected and te AdminClient provides you a list of deployments you can attempt to connect to
-
-OGG 2> connect http://hostname:16000 deployment Atlanta_1
-as oggadmin password welcome1
 ![](images/500/Lab500_image106.png)
+
 
 6. Perform an “info all” command and other GoldenGate commands to see what
 AdminClient can do
