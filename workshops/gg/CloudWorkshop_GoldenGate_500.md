@@ -88,8 +88,7 @@ cd /opt/app/oracle/product/swingbench/bin
 2. Execute the swingbench command
 
 /swingbench
-
-![](images/502/Lab502_image103.png)
+![](images/500/Lab502_image103.PNG)
 
 3. Once Swingbench starts, select the SOE_Server_Side_V2 configuration file.
 
