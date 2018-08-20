@@ -102,7 +102,7 @@ Benchmark Run Time: 10 mins
 
 adjust parameters for generating records
 
-![](images/502/Lab502_image105.png)
+![](images/500/Lab502_image105.PNG)
 
 5. Execute Swingbench
 
