@@ -1,6 +1,6 @@
 ![](images/500/Lab500_image100.PNG)
 
-Update August 17th 2018
+Update August 20th 2018
 
 ## CONNECT AND INTERACT WITH ADMINCLIENT
 ## Introduction
