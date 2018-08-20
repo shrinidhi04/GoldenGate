@@ -94,9 +94,10 @@ cd /opt/app/oracle/product/swingbench/bin
 
 ![](images/500/Lab502_image104.PNG)
 
-4. Once Swingbench is open, update Password, Connect String, Benchmark and Run Time
-Password: welcome1
-Connect String: //hostname/pdb1
+4. Once Swingbench is open, update Password, Connect String, Benchmark and Run Time:
+
+Password: welcome1 --
+Connect String: //hostname/pdb1 --
 Benchmark Run Time: 10 mins
 
 ![](images/502/Lab502_image105.png)
