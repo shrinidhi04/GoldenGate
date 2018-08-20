@@ -63,13 +63,14 @@ In this lab, you will take a look at how to pull a list of services from Oracle 
 Steps:
 1. Open a command window (right mouse click – Open Terminal)
 
-2. Try running the following CURL command.
+2. Try running the following CURL command
+
 curl -u oggadmin:welcome1 -H "Content-Type: application/json" -H "Accept:
-application/json" -X GET
-http://hostname:<port>/services/v2/deployments/SanFran_1/services/distsrvr/logs |
+application/json" -X GET http://hostname:<port>/services/v2/deployments/SanFran_1/services/distsrvr/logs |
 python -mjson.tool
 
 3. Retrieve Log locations using the following CURL command
+
 curl -u oggadmin:welcome1 -H "Content-Type:application/json" -H
 "Accept:application/json" -X GET http://hostname:<port>/services/v2/logs | python - mjson.tool
 
