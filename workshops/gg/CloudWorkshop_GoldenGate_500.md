@@ -92,7 +92,7 @@ cd /opt/app/oracle/product/swingbench/bin
 
 3. Once Swingbench starts, select the SOE_Server_Side_V2 configuration file.
 
-![](images502/Lab502_image104.png)
+![](images/500/Lab502_image104.PNG)
 
 4. Once Swingbench is open, update the Password, Connect String, and Benchmark Run
 Time
