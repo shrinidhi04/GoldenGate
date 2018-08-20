@@ -45,7 +45,7 @@ AdminClient can do
 
 OGG Atlanta_1 3> info all
 
-![](images/500/Lab500_image107.png)
+![](images/500/Lab500_image107.PNG)
 
 Note: checkout the RLWRAP function as well (arrow up and down while in AdminClient)
 
