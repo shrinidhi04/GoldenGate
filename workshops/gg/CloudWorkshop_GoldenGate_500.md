@@ -105,6 +105,7 @@ adjust parameters for generating records
 ![](images/502/Lab502_image105.png)
 
 5. Execute Swingbench
+
 ![](images/500/Lab502_image106.PNG)
 
 
