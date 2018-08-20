@@ -22,10 +22,9 @@ cd /opt/app/oracle/product/12.3.0.1/oggcore_1/bin
 ![](images/500/Lab500_image103.PNG)
 
 3. Start the AdminClient
-
 ./adminclient
 
-![](images/500/Lab500_image104.png)
+![](images/500/Lab500_image103.PNG)
 
 4. Connect to Oracle GoldenGate without a deployment
 
