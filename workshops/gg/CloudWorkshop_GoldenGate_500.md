@@ -83,8 +83,7 @@ Steps:
 1. Open a command terminal and navigate to the Swingbench bin directory
 
 cd /opt/app/oracle/product/swingbench/bin
-
-![](images/502/Lab502_image102.png)
+![](images/500/Lab502_image1002.PNG)
 
 2. Execute the swingbench command
 
