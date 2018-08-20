@@ -9,7 +9,7 @@ In this lab, you will take a look at how to connect and interact with the Micros
 
 
 Steps:
-1. Open a command terminal.
+1. Open a command terminal
 Right mouse click -> Open Terminal
 
 ![](images/500/Lab500_image101.PNG)
@@ -20,11 +20,11 @@ Right mouse click -> Open Terminal
 cd /opt/app/oracle/product/12.3.0.1/oggcore_1/bin
 ![](images/500/Lab500_image103.png)
 
-3. Start the AdminClient.
+3. Start the AdminClient
  ./adminclient
 ![](images/500/Lab500_image104.png)
 
-4. Connect to Oracle GoldenGate without a deployment.
+4. Connect to Oracle GoldenGate without a deployment
 OGG 1> connect http://hostname:16000 as oggadmin password welcome1
 ![](images/500/Lab500_image104a.png)
 
