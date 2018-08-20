@@ -94,8 +94,8 @@ cd /opt/app/oracle/product/swingbench/bin
 
 ![](images/500/Lab502_image104.PNG)
 
-4. Once Swingbench is open, update the Password, Connect String, and Benchmark Run
-Time
+4. Once Swingbench is open, update Password, Connect String, Benchmark and Run Time
+
 Password: welcome1
 Connect String: //hostname/pdb1
 Benchmark Run Time: 10 mins
@@ -104,7 +104,6 @@ Benchmark Run Time: 10 mins
 
 5. Execute Swingbench
 
-![](images/502/Lab502_image106.png)
 
 At this point you should see activity on the table by looking at the Extract/Replicats.
 Correct any problems that may arise due.
