@@ -105,7 +105,6 @@ adjust parameters for generating records
 ![](images/502/Lab502_image105.png)
 
 5. Execute Swingbench
-
 ![](images/502/Lab502_image106.png)
 
 At this point you should see activity on the table by looking at the Extract/Replicats.
