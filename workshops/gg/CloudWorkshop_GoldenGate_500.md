@@ -18,7 +18,8 @@ Right mouse click -> Open Terminal
 
 2. Navigate to the Oracle GoldenGate 12.3 binary directory
 cd /opt/app/oracle/product/12.3.0.1/oggcore_1/bin
-![](images/500/Lab500_image102.PNG)
+
+![](images/500/Lab500_image103.PNG)
 
 3. Start the AdminClient
  /adminclient
