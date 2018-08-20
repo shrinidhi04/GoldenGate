@@ -100,10 +100,11 @@ Password: welcome1 --
 Connect String: //hostname/pdb1 --
 Benchmark Run Time: 10 mins
 
-![](images/502/Lab502_image105.png)
-
 5. Execute Swingbench
 
+adjust parameters for generating records
+
+![](images/502/Lab502_image105.png)
 
 At this point you should see activity on the table by looking at the Extract/Replicats.
 Correct any problems that may arise due.
