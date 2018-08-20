@@ -86,7 +86,7 @@ cd /opt/app/oracle/product/swingbench/bin
 
 ![](images/502/Lab502_image102.png)
 
-2. Execute the swingbench command (Figure A-2)
+2. Execute the swingbench command
 ./swingbench
 
 ![](images/502/Lab502_image103.png)
