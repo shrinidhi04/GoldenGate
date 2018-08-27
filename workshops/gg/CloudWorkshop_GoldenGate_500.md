@@ -180,19 +180,20 @@ Set up Goldengate Extract on the source MYSQL DB
 ![](images/500/Lab503_image114.PNG)
 
 15.	Now connect to DB with the credential created
-![](images/500/Lab503_image115.png)
+
+![](images/500/Lab503_image115.PNG)
 
 16.	Then you can create a checkpoint table in the DB
 
-![](images/500/Lab503_image116.png)
+![](images/500/Lab503_image116.PNG)
 
 17.	Now go to Overview tab to create the replicat
 
-![](images/500/Lab503_image117.png)
+![](images/500/Lab503_image117.PNG)
 
 18.	Select the type of the replicat
 
-![](images/500/Lab503_image118.png)
+![](images/500/Lab503_image118.PNG)
 
 19.	Complete all the details
 
