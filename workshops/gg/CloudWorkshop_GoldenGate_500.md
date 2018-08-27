@@ -126,3 +126,4 @@ Steps:
 1. Connect to mySQL using Putty
 
 ![](images/500/Lab503_image101.png)
+
