@@ -1,6 +1,6 @@
 ![](images/500/Lab500_image100.PNG)
 
-Update August 21 2018
+August 2018
 
 ## CONNECT AND INTERACT WITH ADMINCLIENT
 ## Introduction
@@ -126,3 +126,4 @@ Steps:
 1. Connect to mySQL using Putty
 
 ![](images/500/Lab503_image101.png)
+
