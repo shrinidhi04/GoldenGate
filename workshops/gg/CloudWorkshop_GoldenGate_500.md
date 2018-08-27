@@ -161,3 +161,27 @@ Set up Goldengate Extract on the source MYSQL DB
 
 ![](images/500/Lab503_image109.PNG)
 
+10. If you check in receiver server there will not be any paths before you start the pump on the source side.
+
+![](images/500/Lab503_image110.png)
+
+11.	Once the pump is started on the source side you will see a path created
+
+![](images/500/Lab503_image111.png)
+
+12.	You can check the trail files on the system as well
+
+![](images/500/Lab503_image112.png)
+
+13.	Now go to administrative server CONFIGURATION tab
+
+![](images/500/Lab503_image113.png)
+
+14.	You can add DB credentials there which will be used by Replicat process
+
+![](images/500/Lab503_image114.png)
+
+15.	Now connect to DB with the credential created
+
+![](images/500/Lab503_image115.png)
+
