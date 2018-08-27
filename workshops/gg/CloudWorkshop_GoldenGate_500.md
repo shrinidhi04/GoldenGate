@@ -205,20 +205,23 @@ Set up Goldengate Extract on the source MYSQL DB
 
 21.	Once created 
 
-![](images/500/Lab503_image121.png)
+![](images/500/Lab503_image121.PNG)
 
 22.	You can check the statistics
 
-![](images/500/Lab503_image122.png)
+
+![](images/500/Lab503_image122.PNG)
 
 23.	You can log in to Database and check the counts
 
-![](images/500/Lab503_image123.png)
+![](images/500/Lab503_image123.PNG)
 
 24.	connecting to GG Admin client will require the same private key 
 
-![](images/500/Lab503_image124.png)
+![](images/500/Lab503_image124.PNG)
 
 25.	you can check the same stats of replicat remotely from the admin client
 
-![](images/500/Lab503_image125.png)
+![](images/500/Lab503_image125.PNG)
+
+![](images/500/Lab503_image125a.PNG)
