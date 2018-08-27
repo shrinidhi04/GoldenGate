@@ -133,12 +133,17 @@ Set up Goldengate Extract on the source MYSQL DB
 ![](images/500/Lab503_image102.png)
 
 3.	Load the private key in the putty
-![](images/500/Lab503_image103.png)
+
+![](images/500/Lab503_image103.PNG)
 
 4.	Log in as user ‘ravello’
-![](images/500/Lab503_image104.png)
+
+![](images/500/Lab503_image104.PNG)
+
 5.	Golden gate instance is already installed and set up for the MYSQL DB in /opt/gg4mysql/
+
 ![](images/500/Lab503_image105.png)
+
 6.	Both extract and pump process is already been set up. You need to add the remote host ip address in the PUMP parameter file. You can find the remote host ip from the EURO instance and the MGRPORT would be target receiver server port
 
 ![](images/500/Lab503_image106.png)
