@@ -205,12 +205,9 @@ Set up Goldengate Extract on the source MYSQL DB
 
 21.	Once created 
 
-
 ![](images/500/Lab503_image121.PNG)
 
-
-22.	You can check the statistics
-
+22.	You can check the statistic
 
 ![](images/500/Lab503_image122.PNG)
 
