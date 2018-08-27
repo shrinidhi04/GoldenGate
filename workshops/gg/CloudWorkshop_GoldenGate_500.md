@@ -170,7 +170,4 @@ Set up Goldengate Extract on the source MYSQL DB
 ![](images/500/Lab503_image111.png)
 
 12.	You can check the trail files on the system as well
-
-![](images/500/Lab503_image112.png)
-
-
+![](images/500/Lab503_image112.PNG)
