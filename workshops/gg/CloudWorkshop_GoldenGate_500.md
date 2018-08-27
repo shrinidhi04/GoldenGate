@@ -142,21 +142,20 @@ Set up Goldengate Extract on the source MYSQL DB
 
 5.	Golden gate instance is already installed and set up for the MYSQL DB in /opt/gg4mysql/
 
-![](images/500/Lab503_image105.png)
+![](images/500/Lab503_image105.PNG)
 
 6.	Both extract and pump process is already been set up. You need to add the remote host ip address in the PUMP parameter file. You can find the remote host ip from the EURO instance and the MGRPORT would be target receiver server port
 
-![](images/500/Lab503_image106.png)
-
+![](images/500/Lab503_image106.PNG)
 
 7.	You can load the test tables with the below scrip in the location /home/ravello/sql
 
-![](images/500/Lab503_image107.png)
+
+![](images/500/Lab503_image107.PNG)
 
 8.	Once you load the table check the stats of the extract
 
-![](images/500/Lab503_image108.png)
-
+![](images/500/Lab503_image108.PNG)
 
 9.	On the target EURO instance make sure all the processes are running 
 
