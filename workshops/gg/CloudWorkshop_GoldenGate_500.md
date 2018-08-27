@@ -174,14 +174,3 @@ Set up Goldengate Extract on the source MYSQL DB
 ![](images/500/Lab503_image112.png)
 
 13.	Now go to administrative server CONFIGURATION tab
-
-![](images/500/Lab503_image113.png)
-
-14.	You can add DB credentials there which will be used by Replicat process
-
-![](images/500/Lab503_image114.png)
-
-15.	Now connect to DB with the credential created
-
-![](images/500/Lab503_image115.png)
-
