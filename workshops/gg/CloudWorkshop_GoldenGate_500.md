@@ -160,3 +160,4 @@ Set up Goldengate Extract on the source MYSQL DB
 9.	On the target EURO instance make sure all the processes are running 
 
 ![](images/500/Lab503_image109.PNG)
+
