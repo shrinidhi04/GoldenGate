@@ -173,4 +173,4 @@ Set up Goldengate Extract on the source MYSQL DB
 
 ![](images/500/Lab503_image112.png)
 
-13.	Now go to administrative server CONFIGURATION tab
+
