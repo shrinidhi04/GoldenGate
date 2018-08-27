@@ -126,8 +126,7 @@ Set up Goldengate Extract on the source MYSQL DB
 
 1.	Connecting to ravello instance from putty , Once you start the MYSQL instance IP address will appear
 
-
-![](images/500/Lab503_image101.png)
+![](images/500/Lab503_image101.PNG)
 
 2.	You would need the private key file to connect the instance
 
