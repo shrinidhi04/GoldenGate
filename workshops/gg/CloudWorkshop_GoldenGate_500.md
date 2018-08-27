@@ -1,5 +1,6 @@
 ![](images/500/Lab500_image100.PNG)
 Aug 2018
+
 ## CONNECT AND INTERACT WITH ADMINCLIENT
 ## Introduction
 
@@ -203,3 +204,24 @@ Set up Goldengate Extract on the source MYSQL DB
 20.	You can manually change the parameter file before creating
 
 ![](images/500/Lab503_image120.png)
+
+21.	Once created 
+
+![](images/500/Lab503_image121.png)
+
+22.	You can check the statistics
+
+![](images/500/Lab503_image122.png)
+
+23.	You can log in to Database and check the counts
+
+![](images/500/Lab503_image123.png)
+
+24.	connecting to GG Admin client will require the same private key 
+
+![](images/500/Lab503_image124.png)
+
+25.	you can check the same stats of replicat remotely from the admin client
+
+![](images/500/Lab503_image125.png)
+
