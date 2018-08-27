@@ -180,7 +180,6 @@ Set up Goldengate Extract on the source MYSQL DB
 ![](images/500/Lab503_image114.PNG)
 
 15.	Now connect to DB with the credential created
-
 ![](images/500/Lab503_image115.png)
 
 16.	Then you can create a checkpoint table in the DB
