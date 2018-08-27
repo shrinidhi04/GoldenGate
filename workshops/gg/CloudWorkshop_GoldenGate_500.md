@@ -159,70 +159,8 @@ Set up Goldengate Extract on the source MYSQL DB
 
 9.	On the target EURO instance make sure all the processes are running 
 
-![](images/500/Lab503_image109.PNG)
+![](images/500/Lab503_image109.png)
 
 10. If you check in receiver server there will not be any paths before you start the pump on the source side.
 
-![](images/500/Lab503_image110.PNG)
-
-11.	Once the pump is started on the source side you will see a path created
-
-![](images/500/Lab503_image111.PNG)
-
-12.	You can check the trail files on the system as well
-
-![](images/500/Lab503_image112.PNG)
-
-13.	Now go to administrative server CONFIGURATION tab
-
-![](images/500/Lab503_image113.PNG)
-
-
-14.	You can add DB credentials there which will be used by Replicat process
-
-![](images/500/Lab503_image114.png)
-
-15.	Now connect to DB with the credential created
-
-![](images/500/Lab503_image115.png)
-
-16.	Then you can create a checkpoint table in the DB
-
-![](images/500/Lab503_image116.png)
-
-17.	Now go to Overview tab to create the replicat
-
-![](images/500/Lab503_image117.png)
-
-18.	Select the type of the replicat
-
-![](images/500/Lab503_image118.png)
-
-19.	Complete all the details
-
-![](images/500/Lab503_image119.png)
-
-20.	You can manually change the parameter file before creating
-
-![](images/500/Lab503_image120.png)
-
-
-21.	Once created 
-
-![](images/500/Lab503_image121.png)
-
-22.	You can check the statistics
-
-![](images/500/Lab503_image122.png)
-
-23.	You can log in to Database and check the counts
-
-![](images/500/Lab503_image123.png)
-
-24.	connecting to GG Admin client will require the same private key 
-
-![](images/500/Lab503_image124.png)
-
-25.	you can check the same stats of replicat remotely from the admin client
-
-![](images/500/Lab503_image125.png)
+![](images/500/Lab503_image110.png)
