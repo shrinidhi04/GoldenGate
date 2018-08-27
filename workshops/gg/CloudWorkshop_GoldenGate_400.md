@@ -7,8 +7,6 @@ Update August 2, 2018
 
 This lab walk you through bidirectional and auto CDR between two database schemas using Goldengate 12.3 micro services web interface in a Ravello environment.
 
-![](images/400/Lab400_image104.png)
-
 This lab supports the following use cases:
 -	Seting up bidirection goldengate replication between two databases.
 -	Setting up auto conflict detection and resolution.
@@ -22,90 +20,81 @@ This lab supports the following use cases:
 
 ## Required Artifacts
 
-Lab 7a: Configure Uni-Directional Replication from AMER DB to EURO DB (Integrated Extract)
+Lab A: Configure Uni-Directional Replication from AMER DB to EURO DB (Integrated Extract)
 
 Objective:
 
-This lab is in two parts.  The first part will setup the Integrated Extract for Oracle GoldenGate 12c Service Architecture for a uni-directional configuration using the SOE schema in PDB1 and PDB2. 
+This lab is in two parts.  The first part will setup the Integrated Extract for Oracle GoldenGate 12c Service Architecture for a uni-directional configuration using the SOE schema in AMER and EURO. 
 
 Time: 25 minutes
 
 Steps:
 
-1.	Open Firefox and login to the Service Manager using the Administrator account you setup during deployment (Figure 7a-1). Port number will vary depending on what you used during setup.
+1.	Open Firefox and login to the Service Manager using the Administrator account you setup during deployment (Figure A-1). Port number will vary depending on what you used during setup.
 
-For Ravello Environment
-http://<dns url>:16000
-http://localhost:16000
-http://<Private IP>:1600
+For Ravello Environment - 
+http://<dns url>:8890 or
+http://localhost:8890 or
+http://<Private IP>:8890
 
 
-Figure 7a-1:
+Figure A-1:
 
 ![](images/400/Lab400_image110.png) 
  
 
-2.	After logging in, find and open the Administration Server for your first deployment.  In this example, the first deployment is Atlanta_1 (Figure 7a-2).  When the page is completely open, you should be at a page where you can see Extracts/Replicats clearly.
+2.	After logging in, find and open the Administration Server for your deployment.  In this example, the deployment is amer (Figure A-2).  When the page is completely open, you should be at a page where you can see Extracts/Replicats clearly.
 Note: You will be required to login again.  Use the same Administrator account that was used with the Service Manager.
 
-Figure 7a-2:
+Figure A-2:
 
 ![](images/400/Lab400_image120.png) 
  
 
-3.	Before you can create an Extract, you need to setup a credential alias for the GoldenGate user (C##GGATE).  This is done from the Configuration menu option in the grey bar on the left of the screen (Figure 7a-3).
+3.	Before you can create an Extract, you need to setup a credential alias for the GoldenGate user (GGADMIN).  This is done from the Configuration menu option in the grey bar on the left of the screen (Figure A-3).
 
-Figure 7a-3:
+Figure A-3:
 
 ![](images/400/Lab400_image130.png) 
 
 ![](images/400/Lab400_image140.png) 
  
 
-4.	On the Configuration page, select the plus ( + ) sign to begin adding a credential.  At this point, you will be able to add a Credential Alias (Figure 7a-4).  You will need to add the alias for a user that will connect to CDB and PDB1.  The CDB alias will be used to connect to the database to read the required files for extraction operations, and the PDB1 user will be used to add TRANDATA to the schemas used in replication.
+4.	On the Configuration page, select the plus ( + ) sign to begin adding a credential.  At this point, you will be able to add a Credential Alias (Figure A-4).  You will need to add the alias for a user that will connect to DB.  The DB alias will be used to connect to the database to read the required files for extraction operations, and to add TRANDATA to the schemas used in replication.
 
-Figure 7a-4:
+Figure A-4:
 
 ![](images/400/Lab400_image150.png) 
  
 
 You will notice that a Domain name and Credential Alias were added along with the User ID and Password.  After adding the user to the credential store, you will reference it via its domain name and credential alias.
 
-You will need to create two (2) credential aliases for your Atlanta_1 deployment. The first credential will be for the CDB database and the second will be for the PDB1 database. The table below shows what needs to be added:
+5.	Verify that the credentials you just created work.  There is a little man icon under Action in the table.  Click on this for each Credential Alias and you should be able to login to the database (Figure A-5).
 
-
-Credential Domain	Credential Alias	UserID	Password
-SGGATE	SGGATE	C##GGATE@PDB1	ggate
-CDBGGATE	CDBGGATE	C##GGATE@CDB	ggate
- 
-
-5.	Verify that the credentials you just created work.  There is a little man icon under Action in the table.  Click on this for each Credential Alias and you should be able to login to the database (Figure 7a-5).
-
-Figure 7a-5:
-
+Figure A-5:
 ![](images/400/Lab400_image160.png) 
  
 
-6.	Add SCHEMATRANDATA to the SOE schema using the SGGATE Credential Alias.  
-After logging into the database as described in step 5 for PDB1, find the Trandata section.  Click on the plus ( + ) sign and make sure that the radio button for Schema is selected (Figure 7a-6).  At this point, you provide the Schema Name, enable All Columns and Scheduling Columns, and click Submit.
+6.	Add SCHEMATRANDATA to the SOE schema using the GGADMIN Credential Alias.  
+After logging into the database as described in step 5 for the DB, find the Trandata section.  Click on the plus ( + ) sign and make sure that the radio button for Schema is selected (Figure A-6).  At this point, you provide the Schema Name, enable All Columns and Scheduling Columns, and click Submit.
 
-Figure 7a-6:
+Figure A-6:
 
 ![](images/400/Lab400_image170.png) 
  
 
-You will notice that after you click Submit, there is no return message that states the operation was successful.  You can verify that SCHEMATRANDATA has been added by looking searching by Schema (Figure 7a-7).  To do this, click on the magnifying glass and provide the Schema name.
+You will notice that after you click Submit, there is no return message that states the operation was successful.  You can verify that SCHEMATRANDATA has been added by looking searching by Schema (Figure A-7).  To do this, click on the magnifying glass and provide the Schema name.
 
-Figure 7a-7:
+Figure A-7:
 
 ![](images/400/Lab400_image180.png) 
  
 
 7.	Add the Protocol user.
 Since we are on the Credential screen, let’s go ahead and add a Protocol user.  A Protocol user is the user that the Distribution Server will use to communicate with the Receiver Server over an unsecure connection.
-As you did in Step 4, click the plus sign ( + ) next to the word Credentials.  Then provide the connection information needed (Figure 7a-8), notice that you will be using the Service Manager login in this credential.
+As you did in Step 4, click the plus sign ( + ) next to the word Credentials.  Then provide the connection information needed (Figure A-8), notice that you will be using the Service Manager login in this credential.
 
-Figure 7a-8:
+Figure A-8:
 
 ![](images/400/Lab400_image190.png) 
  
@@ -113,31 +102,29 @@ Figure 7a-8:
 For now, just leave this login alone.  It will be used in a later step. 
 
 8.	Add the Integrated Extract.
-Navigate back to the Overview page of the Administration Server (Figure 7a-9).  Then click on the plus sign ( + ) in the box for Extracts.
+Navigate back to the Overview page of the Administration Server (Figure A-9).  Then click on the plus sign ( + ) in the box for Extracts.
 
-Figure 7a-9:
+Figure A-9:
 
-![](images/400/Lab400_image400.png) 
+![](images/400/Lab400_image200.png) 
 
 
-After clicking the plus sign ( + ), you are taken to the Add Extract page (Figure 7a-10).  Here you can choose from three different types of Extracts.  You will be installing an Integrated Extract.  Click Next.
+After clicking the plus sign ( + ), you are taken to the Add Extract page (Figure A-10).  Here you can choose from three different types of Extracts.  You will be installing an Integrated Extract.  Click Next.
 
-Figure 7a-10:
+Figure A-10:
 
 ![](images/400/Lab400_image210.png) 
 
 
-The next page of the Add Extract process, is to provide the basic information for the Extract. Items required have a star ( * ) next to them.  Provide the required information and then click Next (Figure 7a-11).  Keep in mind that the credentials needed to register the Extract need to be against the CDB. Use the CDB domain and alias that you setup previously.
+The next page of the Add Extract process, is to provide the basic information for the Extract. Items required have a star ( * ) next to them.  Provide the required information and then click Next (Figure A-11).  
 
-When using the CDB credential, at the bottom of the page, you will be presented with a box where you can select the PDB that will be used. This will only appear when you have a valid credential for the CDB.  Once you see this box, make sure you select PDB1. 
-
-Figure 7a-11:
+Figure A-11:
 
 ![](images/400/Lab400_image220.png) 
  
 
-On the last page of the Add Extract process, you are presented with a parameter file (Figure 7a-12).  The parameter file is partially filled out, but missing the TABLE parameters. Insert the following list of TABLE parameter values into the parameter file.
-SOURCECATALOG PDB1
+On the last page of the Add Extract process, you are presented with a parameter file (Figure A-12).  The parameter file is partially filled out, but missing the TABLE parameters. Insert the following list of TABLE parameter values into the parameter file.
+
 TABLE SOE.ADDRESSES;
 TABLE SOE.CUSTOMERS;
 TABLE SOE.ORDERS;
@@ -153,13 +140,13 @@ TABLE SOE.ORDERENTRY_METADATA;
 Notes: ~/Desktop/Software/extract.prm has these contents for copying.
 Once the TABLE statements are added, click Create and Run at the bottom of the page.
 
-Figure 7a-12:
+Figure A-12:
  
 ![](images/400/Lab400_image230.png) 
 
-The Administration Server page will refresh when the process is done registering the Extract with the database, and will show that the Extract is up and running (Figure 7a-13).
+The Administration Server page will refresh when the process is done registering the Extract with the database, and will show that the Extract is up and running (Figure A-13).
 
-Figure 7a-13:
+Figure A-13:
  
 ![](images/400/Lab400_image240.png) 
 
