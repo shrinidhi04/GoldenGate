@@ -345,7 +345,7 @@ http://<Private IP>:8890
 
 Figure E-1:
 
-![](images/400/Lab400_image105.png) 
+![](images/400/Lab400_image410.png) 
  
 
 2.	After logging in, find and open the Administration Server for your deployment.  In this example, the deployment is euro (Figure E-2).  When the page is completely open, you should be at a page where you can see Extracts/Replicats clearly.
@@ -353,16 +353,16 @@ Note: You will be required to login again.  Use the same Administrator account t
 
 Figure E-2:
 
-![](images/400/Lab400_image120.png) 
+![](images/400/Lab400_image420.png) 
  
 
 3.	Before you can create an Extract, you need to setup a credential alias for the GoldenGate user (GGADMIN).  This is done from the Configuration menu option in the grey bar on the left of the screen (Figure E-3).
 
 Figure E-3:
 
-![](images/400/Lab400_image130.png) 
+![](images/400/Lab400_image430.png) 
 
-![](images/400/Lab400_image140.png) 
+![](images/400/Lab400_image440.png) 
  
 
 4.	On the Configuration page, select the plus ( + ) sign to begin adding a credential.  At this point, you will be able to add a Credential Alias (Figure E-4).  You will need to add the alias for a user that will connect to DB.  The DB alias will be used to connect to the database to read the required files for extraction operations, and to add TRANDATA to the schemas used in replication.
