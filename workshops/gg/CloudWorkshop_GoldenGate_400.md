@@ -125,10 +125,30 @@ Figure A-11:
 
 On the last page of the Add Extract process, you are presented with a parameter file (Figure A-12).  The parameter file is partially filled out, but missing the TABLE parameters. Insert the following list of TABLE parameter values into the parameter file.
 
-TABLE SOE.ADDRESSES;                                                                                                              TABLE SOE.CUSTOMERS;                                                                                                              TABLE SOE.ORDERS;                                                                                                                 
-TABLE SOE.ORDER_ITEMS;                                                                                                            TABLE SOE.CARD_DETAILS; 
-TABLE SOE.LOGON;                                                                                                                  TABLE SOE.PRODUCT_INFORMATION;                                                                                                    
-TABLE SOE.INVENTORIES;                                                                                                            TABLE SOE.PRODUCT_DESCRIPTIONS;                                                                                                   TABLE SOE.WAREHOUSES;                                                                                                             TABLE SOE.ORDERENTRY_METADATA; 
+TABLE SOE.ADDRESSES;                                                                                                              
+
+TABLE SOE.CUSTOMERS;                                                                                                              
+
+TABLE SOE.ORDERS;                                                                                                                 
+
+
+TABLE SOE.ORDER_ITEMS;                                                                                                            
+
+TABLE SOE.CARD_DETAILS; 
+
+
+TABLE SOE.LOGON;                                                                                                                  
+
+TABLE SOE.PRODUCT_INFORMATION;                                                                                                    
+
+
+TABLE SOE.INVENTORIES;                                                                                                            
+
+TABLE SOE.PRODUCT_DESCRIPTIONS;                                                                                                   
+
+TABLE SOE.WAREHOUSES;                                                                                                             
+
+TABLE SOE.ORDERENTRY_METADATA; 
 
 Notes: ~/Desktop/Software/extract.prm has these contents for copying.
 Once the TABLE statements are added, click Create and Run at the bottom of the page.
@@ -238,38 +258,62 @@ Figure D-3:
  
 ![](images/400/Lab400_image340.png) 
 
-
-4.	Navigate back to the Overview page on the Administration Server.  Here you will begin to create your Integrated Replicat (Figure D-4).  Click the plus sign ( + ) to open the Add Replicat process.
+4. After Adding the credential you would need to create the checkpoint table 
 
 Figure D-4:
+ 
+![](images/400/Lab400_image390.png) 
+
+5.	Navigate back to the Overview page on the Administration Server.  Here you will begin to create your Integrated Replicat (Figure D-5).  Click the plus sign ( + ) to open the Add Replicat process.
+
+Figure D-5:
  
 ![](images/400/Lab400_image350.png) 
 
 
-5.	With the Add Replicat page open, you want to create an Integrated Replicat.  Make sure the radio button is selected and click Next (Figure D-5).
+6.	With the Add Replicat page open, you want to create a Nonintegrated Parallel Replicat.  Make sure the radio button is selected and click Next (Figure D-6).
 
-Figure D-5:
+Figure D-6:
  
 ![](images/400/Lab400_image360.png) 
 
 
-6.	Fill in the Replicat options form with the required information (Figure D-6).  Your trail name should match the trail name you saw in the Receiver Server.  Once you are done filling everything out, click the Next button at the bottom of the screen.
+7.	Fill in the Replicat options form with the required information (Figure D-7).  Your trail name should match the trail name you saw in the Receiver Server.  Once you are done filling everything out, click the Next button at the bottom of the screen.
 
-Figure D-6:
+Figure D-7:
  
 ![](images/400/Lab400_image370.png) 
 
-7.	You are next taken to the Parameter File page.  On this page, you will notice that a sample parameter file is provided (Figure D-7).  You will have to remove the MAP statement and replace it with the information below:
+8.	You are next taken to the Parameter File page.  On this page, you will notice that a sample parameter file is provided (Figure D-8).  You will have to remove the MAP statement and replace it with the information below:
 
 INSERTMISSINGUPDATES
-MAP PDB1.SOE.CUSTOMERS, TARGET SOE.CUSTOMERS, KEYCOLS (CUSTOMER_ID);                                                              MAP PDB1.SOE.ADDRESSES, TARGET SOE.ADDRESSES, KEYCOLS (ADDRESS_ID);                                                               
-MAP PDB1.SOE.ORDERS, TARGET SOE.ORDERS, KEYCOLS (ORDER_ID);                                                                       MAP PDB1.SOE.ORDER_ITEMS, TARGET SOE.ORDER_ITEMS, KEYCOLS (ORDER_ID, LINE_ITEM_ID);                                               MAP PDB1.SOE.CARD_DETAILS, TARGET SOE.CARD_DETAILS, KEYCOLS (CARD_ID);
-MAP PDB1.SOE.LOGON, TARGET SOE.LOGON;                                                                                             MAP PDB1.SOE.PRODUCT_INFORMATION, TARGET SOE.PRODUCT_INFORMATION;                                                                 MAP PDB1.SOE.INVENTORIES, TARGET SOE.INVENTORIES, KEYCOLS (PRODUCT_ID, WAREHOUSE_ID);
-MAP PDB1.SOE.PRODUCT_DESCRIPTIONS, TARGET SOE.PRODUCT_DESCRIPTIONS;                                                               MAP PDB1.SOE.WAREHOUSES, TARGET SOE.WAREHOUSES;                                                                                   MAP PDB1.SOE.ORDERENTRY_METADATA, TARGET SOE.ORDERENTRY_METADATA;
+
+MAP PDB1.SOE.CUSTOMERS, TARGET SOE.CUSTOMERS, KEYCOLS (CUSTOMER_ID);                                                              
+
+MAP PDB1.SOE.ADDRESSES, TARGET SOE.ADDRESSES, KEYCOLS (ADDRESS_ID);                                                               
+
+MAP PDB1.SOE.ORDERS, TARGET SOE.ORDERS, KEYCOLS (ORDER_ID);                                                                       
+
+MAP PDB1.SOE.ORDER_ITEMS, TARGET SOE.ORDER_ITEMS, KEYCOLS (ORDER_ID, LINE_ITEM_ID);                                               
+
+MAP PDB1.SOE.CARD_DETAILS, TARGET SOE.CARD_DETAILS, KEYCOLS (CARD_ID);
+
+MAP PDB1.SOE.LOGON, TARGET SOE.LOGON;                                                                                             
+
+MAP PDB1.SOE.PRODUCT_INFORMATION, TARGET SOE.PRODUCT_INFORMATION;                                                                 
+
+MAP PDB1.SOE.INVENTORIES, TARGET SOE.INVENTORIES, KEYCOLS (PRODUCT_ID, WAREHOUSE_ID);
+
+MAP PDB1.SOE.PRODUCT_DESCRIPTIONS, TARGET SOE.PRODUCT_DESCRIPTIONS;                                                               
+
+MAP PDB1.SOE.WAREHOUSES, TARGET SOE.WAREHOUSES;                                                                                   
+
+MAP PDB1.SOE.ORDERENTRY_METADATA, TARGET SOE.ORDERENTRY_METADATA;
+
 Notes: ~/Desktop/Software/replicat.prm has these contents for copying.
 Once the parameter file has been updated, click the Create and Run button at the bottom.
 
-Figure D-7:
+Figure D-8:
  
 ![](images/400/Lab400_image380.png) 
 
