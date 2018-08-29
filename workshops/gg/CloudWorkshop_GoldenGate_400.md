@@ -198,10 +198,15 @@ Figure B-4:
 
 Notice the drop down with the values WS, WSS, UDT and OGG.  These are the protocols you can select to use for transport.  Since you are setting up an unsecure uni-directional replication, make sure you select WS, then provide the following target information:
 Hostname: ogg123rs
+
 Port: <2nd deployment’s receiver server port>
+
 Trail File: <any two letter value>
+
 Domain: <credential you created in the Admin Server for WS>
+
 Alias: <credential you created in the Admin Server for WS>
+
 After filling out the form, click Create and Run at the bottom of the page.
 
 5.	If everything works as expected, your Distribution Path should be up and running.  You should be able to see clearly the source and target on this page (Figure B-5).
