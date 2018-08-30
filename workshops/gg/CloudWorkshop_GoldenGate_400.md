@@ -423,12 +423,12 @@ Figure E-10:
 
 The next page of the Add Extract process, is to provide the basic information for the Extract. Items required have a star ( * ) next to them.  Provide the required information and then click Next (Figure E-11).  
 
-Figure A-11:
+Figure E-11:
 
 ![](images/400/Lab400_image220.png) 
  
 
-On the last page of the Add Extract process, you are presented with a parameter file (Figure A-12).  The parameter file is partially filled out, but missing the TABLE parameters. Insert the following list of TABLE parameter values into the parameter file.
+On the last page of the Add Extract process, you are presented with a parameter file (Figure E-12).  The parameter file is partially filled out, but missing the TABLE parameters. Insert the following list of TABLE parameter values into the parameter file.
 
 TABLE SOE.ADDRESSES;                                                                                                              
 
@@ -436,16 +436,13 @@ TABLE SOE.CUSTOMERS;
 
 TABLE SOE.ORDERS;                                                                                                                 
 
-
 TABLE SOE.ORDER_ITEMS;                                                                                                            
 
 TABLE SOE.CARD_DETAILS; 
 
-
 TABLE SOE.LOGON;                                                                                                                  
 
 TABLE SOE.PRODUCT_INFORMATION;                                                                                                    
-
 
 TABLE SOE.INVENTORIES;                                                                                                            
 
@@ -458,17 +455,17 @@ TABLE SOE.ORDERENTRY_METADATA;
 Notes: ~/Desktop/Software/extract.prm has these contents for copying.
 Once the TABLE statements are added, click Create and Run at the bottom of the page.
 
-Figure A-12:
+Figure E-12:
  
 ![](images/400/Lab400_image230.png) 
 
-The Administration Server page will refresh when the process is done registering the Extract with the database, and will show that the Extract is up and running (Figure A-13).
+The Administration Server page will refresh when the process is done registering the Extract with the database, and will show that the Extract is up and running (Figure E-13).
 
-Figure A-13:
+Figure E-13:
  
 ![](images/400/Lab400_image240.png) 
 
-Lab B: Configure Uni-Directional Replication (Distribution Server)
+Lab F: Configure Uni-Directional Replication (Distribution Server)
 
 Objective:
 This lab will walk you through how to setup a Path within the Distribution Server.
@@ -476,28 +473,28 @@ This lab will walk you through how to setup a Path within the Distribution Serve
 Time: 10 minutes
 
 Steps:
-1.	Start from the Service Manager page (Figure B-1).
+1.	Start from the Service Manager page (Figure F-1).
 
-Figure B-1:
+Figure F-1:
 
 ![](images/400/Lab400_image250.png) 
 
 
-2.	Open the Distribution Server page for your first deployment (Figure B-2).
+2.	Open the Distribution Server page for your first deployment (Figure F-2).
 
-Figure B-2:
+Figure F-2:
 
 ![](images/400/Lab400_image260.png) 
 
-3.	Click the plus sign ( + ) to add a new Distribution Path (Figure B-3).
+3.	Click the plus sign ( + ) to add a new Distribution Path (Figure F-3).
 
-Figure B-3:
+Figure F-3:
 
 ![](images/400/Lab400_image270.png) 
 
-4.	On the Add Path page, fill in the required information (Figure B-4).  Make note that the default protocol for distribution service is secure websockets (wss).  You will need to change this to websockets (ws).
+4.	On the Add Path page, fill in the required information (Figure F-4).  Make note that the default protocol for distribution service is secure websockets (wss).  You will need to change this to websockets (ws).
 
-Figure B-4:
+Figure F-4:
 
 ![](images/400/Lab400_image280.png) 
 
@@ -514,14 +511,14 @@ Alias: <credential you created in the Admin Server for WS>
 
 After filling out the form, click Create and Run at the bottom of the page.
 
-5.	If everything works as expected, your Distribution Path should be up and running.  You should be able to see clearly the source and target on this page (Figure B-5).
+5.	If everything works as expected, your Distribution Path should be up and running.  You should be able to see clearly the source and target on this page (Figure F-5).
 
-Figure B-5:
+Figure F-5:
  
 ![](images/400/Lab400_image290.png) 
 
 
-Lab C: Configure Uni-Directional Replication (Receiver Server)
+Lab G: Configure Uni-Directional Replication (Receiver Server)
 
 Objective:
 In this lab, you will configure the Receiver Server for the target database, which will receive the trail from the Distribution Path that you created on the source deployment.
@@ -529,20 +526,20 @@ In this lab, you will configure the Receiver Server for the target database, whi
 Time: 5 minutes
 
 Steps:
-1.	Start from the Service Manager page for your second deployment (Figure C-1).
+1.	Start from the Service Manager page for your second deployment (Figure G-1).
 
-Figure C-1:
+Figure G-1:
  
 ![](images/400/Lab400_image300.png) 
 
-2.	Click on the Receiver Server link to open the Receiver Server page (Figure C-2).  Verify that everything is configured.
+2.	Click on the Receiver Server link to open the Receiver Server page (Figure G-2).  Verify that everything is configured.
 
-Figure C-2:
+Figure G-2:
 
 ![](images/400/Lab400_image310.png) 
 
 
-Lab D: Configure Uni-Directional Replication (Parallel Replicat)
+Lab H: Configure Uni-Directional Replication (Parallel Replicat)
 
 Object:
 In this lab you will configure the Parallel Replicat for the second deployment.
@@ -550,51 +547,51 @@ In this lab you will configure the Parallel Replicat for the second deployment.
 Time: 25 minutes
 
 Steps:
-1.	Starting from the Service Manager page (Figure D-1).
+1.	Starting from the Service Manager page (Figure H-1).
 
-Figure D-1:
+Figure H-1:
  
 ![](images/400/Lab400_image320.png) 
  
-2.	Open the Administration Server for the second deployment by clicking on the link (Figure D-2).
+2.	Open the Administration Server for the second deployment by clicking on the link (Figure H-2).
 
-Figure D-2:
+Figure H-2:
 
 ![](images/400/Lab400_image330.png) 
 
-3.	Open the Configuration option to add your credentials needed to connect to EURO (Figure D-3).  After creating the credential, login and verify that it works.
+3.	Open the Configuration option to add your credentials needed to connect to EURO (Figure H-3).  After creating the credential, login and verify that it works.
 
-Figure D-3:
+Figure H-3:
  
 ![](images/400/Lab400_image340.png) 
 
 4. After Adding the credential you would need to create the checkpoint table 
 
-Figure D-4:
+Figure H-4:
  
 ![](images/400/Lab400_image390.png) 
 
-5.	Navigate back to the Overview page on the Administration Server.  Here you will begin to create your Integrated Replicat (Figure D-5).  Click the plus sign ( + ) to open the Add Replicat process.
+5.	Navigate back to the Overview page on the Administration Server.  Here you will begin to create your Integrated Replicat (Figure H-5).  Click the plus sign ( + ) to open the Add Replicat process.
 
-Figure D-5:
+Figure H-5:
  
 ![](images/400/Lab400_image350.png) 
 
 
-6.	With the Add Replicat page open, you want to create a Nonintegrated Parallel Replicat.  Make sure the radio button is selected and click Next (Figure D-6).
+6.	With the Add Replicat page open, you want to create a Nonintegrated Parallel Replicat.  Make sure the radio button is selected and click Next (Figure H-6).
 
-Figure D-6:
+Figure H-6:
  
 ![](images/400/Lab400_image360.png) 
 
 
-7.	Fill in the Replicat options form with the required information (Figure D-7).  Your trail name should match the trail name you saw in the Receiver Server.  Once you are done filling everything out, click the Next button at the bottom of the screen.
+7.	Fill in the Replicat options form with the required information (Figure H-7).  Your trail name should match the trail name you saw in the Receiver Server.  Once you are done filling everything out, click the Next button at the bottom of the screen.
 
-Figure D-7:
+Figure H-7:
  
 ![](images/400/Lab400_image370.png) 
 
-8.	You are next taken to the Parameter File page.  On this page, you will notice that a sample parameter file is provided (Figure D-8).  You will have to remove the MAP statement and replace it with the information below:
+8.	You are next taken to the Parameter File page.  On this page, you will notice that a sample parameter file is provided (Figure H-8).  You will have to remove the MAP statement and replace it with the information below:
 
 INSERTMISSINGUPDATES
 
@@ -623,7 +620,7 @@ MAP PDB1.SOE.ORDERENTRY_METADATA, TARGET SOE.ORDERENTRY_METADATA;
 Notes: ~/Desktop/Software/replicat.prm has these contents for copying.
 Once the parameter file has been updated, click the Create and Run button at the bottom.
 
-Figure D-8:
+Figure H-8:
  
 ![](images/400/Lab400_image380.png) 
 
