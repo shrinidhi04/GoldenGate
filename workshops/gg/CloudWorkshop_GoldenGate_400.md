@@ -131,16 +131,13 @@ TABLE SOE.CUSTOMERS;
 
 TABLE SOE.ORDERS;                                                                                                                 
 
-
 TABLE SOE.ORDER_ITEMS;                                                                                                            
 
 TABLE SOE.CARD_DETAILS; 
 
-
 TABLE SOE.LOGON;                                                                                                                  
 
 TABLE SOE.PRODUCT_INFORMATION;                                                                                                    
-
 
 TABLE SOE.INVENTORIES;                                                                                                            
 
@@ -197,15 +194,16 @@ Figure B-4:
 ![](images/400/Lab400_image280.png) 
 
 Notice the drop down with the values WS, WSS, UDT and OGG.  These are the protocols you can select to use for transport.  Since you are setting up an unsecure uni-directional replication, make sure you select WS, then provide the following target information:
-Hostname: ogg123rs
 
-Port: <2nd deployment’s receiver server port>
+Hostname: eurosrvr
 
-Trail File: <any two letter value>
+Port: 2nd deployment’s receiver server port
 
-Domain: <credential you created in the Admin Server for WS>
+Trail File: any two letter value
 
-Alias: <credential you created in the Admin Server for WS>
+Domain: credential you created in the Admin Server for WS
+
+Alias: credential you created in the Admin Server for WS
 
 After filling out the form, click Create and Run at the bottom of the page.
 
