@@ -72,6 +72,7 @@ You will notice that a Domain name and Credential Alias were added along with th
 5.	Verify that the credentials you just created work.  There is a little man icon under Action in the table.  Click on this for each Credential Alias and you should be able to login to the database (Figure A-5).
 
 Figure A-5:
+
 ![](images/400/Lab400_image160.png) 
  
 
