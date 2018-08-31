@@ -40,7 +40,7 @@ http://<Private IP>:8890
 
 Figure A-1:
 
-![](images/400/Lab400_image105.png) 
+![](images/400/Lab400_image110.png) 
  
 
 2.	After logging in, find and open the Administration Server for your deployment.  In this example, the deployment is amer (Figure A-2).  When the page is completely open, you should be at a page where you can see Extracts/Replicats clearly.
