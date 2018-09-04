@@ -121,7 +121,7 @@ Navigate back to the Overview page of the Administration Server (Figure 7a-9).  
 
 Figure 7a-9:
 
-![](images/600/Lab600_image600.png) 
+![](images/600/Lab600_image200.png) 
 
 
 After clicking the plus sign ( + ), you are taken to the Add Extract page (Figure 7a-10).  Here you can choose from three different types of Extracts.  You will be installing an Integrated Extract.  Click Next.
