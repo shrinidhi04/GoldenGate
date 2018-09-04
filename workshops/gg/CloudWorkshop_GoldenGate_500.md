@@ -1,7 +1,5 @@
 ![](images/500/Lab500_image100.PNG)
 
-Update August 21 2018
-
 ## CONNECT AND INTERACT WITH ADMINCLIENT
 ## Introduction
 
@@ -123,6 +121,106 @@ At this point, you should have a fully functional REST Api environment.
 In this lab, you will take a look at how to pull a list of services from Oracle GoldenGate using mySQL.
 
 Steps:
-1. Connect to mySQL using Putty
 
-![](images/500/Lab503_image101.png)
+Set up Goldengate Extract on the source MYSQL DB
+
+1.	Connecting to ravello instance from putty , Once you start the MYSQL instance IP address will appear
+
+![](images/500/Lab503_image101.PNG)
+
+2.	You would need the private key file to connect the instance
+
+![](images/500/Lab503_image102.png)
+
+3.	Load the private key in the putty
+
+![](images/500/Lab503_image103.PNG)
+
+4.	Log in as user ‘ravello’
+
+![](images/500/Lab503_image104.PNG)
+
+5.	Golden gate instance is already installed and set up for the MYSQL DB in /opt/gg4mysql/
+
+![](images/500/Lab503_image105.PNG)
+
+6.	Both extract and pump process is already been set up. You need to add the remote host ip address in the PUMP parameter file. You can find the remote host ip from the EURO instance and the MGRPORT would be target receiver server port
+
+![](images/500/Lab503_image106.PNG)
+
+7.	You can load the test tables with the below scrip in the location /home/ravello/sql
+
+
+![](images/500/Lab503_image107.PNG)
+
+8.	Once you load the table check the stats of the extract
+
+![](images/500/Lab503_image108.PNG)
+
+9.	On the target EURO instance make sure all the processes are running 
+
+![](images/500/Lab503_image109.PNG)
+
+10. If you check in receiver server there will not be any paths before you start the pump on the source side.
+
+![](images/500/Lab503_image110.png)
+
+11.	Once the pump is started on the source side you will see a path created
+
+![](images/500/Lab503_image111.png)
+
+12.	You can check the trail files on the system as well
+![](images/500/Lab503_image112.PNG)
+
+13.	Now go to administrative server CONFIGURATION tab
+
+![](images/500/Lab503_image113.png)
+
+14.	You can add DB credentials there which will be used by Replicat process
+![](images/500/Lab503_image114.PNG)
+
+15.	Now connect to DB with the credential created
+
+![](images/500/Lab503_image115.PNG)
+
+16.	Then you can create a checkpoint table in the DB
+
+![](images/500/Lab503_image116.PNG)
+
+17.	Now go to Overview tab to create the replicat
+
+![](images/500/Lab503_image117.PNG)
+
+18.	Select the type of the replicat
+
+![](images/500/Lab503_image118.PNG)
+
+19.	Complete all the details
+
+![](images/500/Lab503_image119.png)
+
+20.	You can manually change the parameter file before creating
+
+![](images/500/Lab503_image120.png)
+
+21.	Once created 
+
+![](images/500/Lab503_image121.png)
+
+22.	You can check the statistic
+
+![](images/500/Lab503_image122.png)
+
+23.	You can log in to Database and check the counts
+
+![](images/500/Lab503_image123.png)
+
+24.	connecting to GG Admin client will require the same private key 
+
+![](images/500/Lab503_image124.png)
+
+25.	you can check the same stats of replicat remotely from the admin client
+
+![](images/500/Lab503_image125.png)
+
+![](images/500/Lab503_image125a.png)
