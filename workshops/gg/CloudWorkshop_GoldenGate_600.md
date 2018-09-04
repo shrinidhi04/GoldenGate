@@ -46,7 +46,7 @@ http://<Private IP>:1600
 
 Figure 7a-1:
 
-![](images/600/Lab600_image110.PNG) 
+![](images/600/Lab600_image111.PNG) 
  
 
 2.	After logging in, find and open the Administration Server for your first deployment.  In this example, the first deployment is Atlanta_1 (Figure 7a-2).  When the page is completely open, you should be at a page where you can see Extracts/Replicats clearly.
