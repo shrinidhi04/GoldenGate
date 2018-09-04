@@ -198,13 +198,13 @@ Notice the drop down with the values WS, WSS, UDT and OGG.  These are the protoc
 
 Hostname: eurosrvr
 
-Port: 2nd deployment’s receiver server port
+Port: 16002
 
-Trail File: any two letter value
+Trail File: bb
 
-Domain: credential you created in the Admin Server for WS
+Domain: WSTARGET
 
-Alias: credential you created in the Admin Server for WS
+Alias: WSTARGET
 
 After filling out the form, click Create and Run at the bottom of the page.
 
