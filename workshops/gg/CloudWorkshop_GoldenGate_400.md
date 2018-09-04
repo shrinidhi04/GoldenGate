@@ -292,27 +292,27 @@ Figure D-7:
 
 INSERTMISSINGUPDATES
 
-MAP PDB1.SOE.CUSTOMERS, TARGET SOE.CUSTOMERS, KEYCOLS (CUSTOMER_ID);                                                              
+MAP SOE.CUSTOMERS, TARGET SOE.CUSTOMERS, KEYCOLS (CUSTOMER_ID);                                                              
 
-MAP PDB1.SOE.ADDRESSES, TARGET SOE.ADDRESSES, KEYCOLS (ADDRESS_ID);                                                               
+MAP SOE.ADDRESSES, TARGET SOE.ADDRESSES, KEYCOLS (ADDRESS_ID);                                                               
 
-MAP PDB1.SOE.ORDERS, TARGET SOE.ORDERS, KEYCOLS (ORDER_ID);                                                                       
+MAP SOE.ORDERS, TARGET SOE.ORDERS, KEYCOLS (ORDER_ID);                                                                       
 
-MAP PDB1.SOE.ORDER_ITEMS, TARGET SOE.ORDER_ITEMS, KEYCOLS (ORDER_ID, LINE_ITEM_ID);                                               
+MAP SOE.ORDER_ITEMS, TARGET SOE.ORDER_ITEMS, KEYCOLS (ORDER_ID, LINE_ITEM_ID);                                               
 
-MAP PDB1.SOE.CARD_DETAILS, TARGET SOE.CARD_DETAILS, KEYCOLS (CARD_ID);
+MAP SOE.CARD_DETAILS, TARGET SOE.CARD_DETAILS, KEYCOLS (CARD_ID);
 
-MAP PDB1.SOE.LOGON, TARGET SOE.LOGON;                                                                                             
+MAP SOE.LOGON, TARGET SOE.LOGON;                                                                                             
 
-MAP PDB1.SOE.PRODUCT_INFORMATION, TARGET SOE.PRODUCT_INFORMATION;                                                                 
+MAP SOE.PRODUCT_INFORMATION, TARGET SOE.PRODUCT_INFORMATION;                                                                 
 
-MAP PDB1.SOE.INVENTORIES, TARGET SOE.INVENTORIES, KEYCOLS (PRODUCT_ID, WAREHOUSE_ID);
+MAP SOE.INVENTORIES, TARGET SOE.INVENTORIES, KEYCOLS (PRODUCT_ID, WAREHOUSE_ID);
 
-MAP PDB1.SOE.PRODUCT_DESCRIPTIONS, TARGET SOE.PRODUCT_DESCRIPTIONS;                                                               
+MAP SOE.PRODUCT_DESCRIPTIONS, TARGET SOE.PRODUCT_DESCRIPTIONS;                                                               
 
-MAP PDB1.SOE.WAREHOUSES, TARGET SOE.WAREHOUSES;                                                                                   
+MAP SOE.WAREHOUSES, TARGET SOE.WAREHOUSES;                                                                                   
 
-MAP PDB1.SOE.ORDERENTRY_METADATA, TARGET SOE.ORDERENTRY_METADATA;
+MAP SOE.ORDERENTRY_METADATA, TARGET SOE.ORDERENTRY_METADATA;
 
 Notes: ~/Desktop/Software/replicat.prm has these contents for copying.
 Once the parameter file has been updated, click the Create and Run button at the bottom.
@@ -364,34 +364,32 @@ Figure E-3:
 ![](images/400/Lab400_image440.png) 
  
 
-4.	On the Configuration page, select the plus ( + ) sign to begin adding a credential.  At this point, you will be able to add a Credential Alias (Figure E-4).  You will need to add the alias for a user that will connect to DB.  The DB alias will be used to connect to the database to read the required files for extraction operations, and to add TRANDATA to the schemas used in replication.
+4.	On the Configuration page, select the plus ( + ) sign to begin adding a credential.  At this point, you will be able to see a Credential Alias (Figure E-4).  The DB alias will be used to connect to the database to read the required files for extraction operations, and to add TRANDATA to the schemas used in replication.
 
 Figure E-4:
 
-![](images/400/Lab400_image150.png) 
+![](images/400/Lab400_image450.png) 
  
-
-You will notice that a Domain name and Credential Alias were added along with the User ID and Password.  After adding the user to the credential store, you will reference it via its domain name and credential alias.
 
 5.	Verify that the credentials you just created work.  There is a little man icon under Action in the table.  Click on this for each Credential Alias and you should be able to login to the database (Figure E-5).
 
 Figure E-5:
-![](images/400/Lab400_image160.png) 
+
+![](images/400/Lab400_image460.png) 
  
 
-6.	Add SCHEMATRANDATA to the SOE schema using the GGADMIN Credential Alias.  
-After logging into the database as described in step 5 for the DB, find the Trandata section.  Click on the plus ( + ) sign and make sure that the radio button for Schema is selected (Figure E-6).  At this point, you provide the Schema Name, enable All Columns and Scheduling Columns, and click Submit.
+6.	Add SCHEMATRANDATA to the SOE schema using the GGADMIN Credential Alias. After logging into the database as described in step 5 for the DB, find the Trandata section.  Click on the plus ( + ) sign and make sure that the radio button for Schema is selected (Figure E-6).  At this point, you provide the Schema Name, enable All Columns and Scheduling Columns, and click Submit.
 
 Figure E-6:
 
-![](images/400/Lab400_image170.png) 
+![](images/400/Lab400_image470.png) 
  
 
 You will notice that after you click Submit, there is no return message that states the operation was successful.  You can verify that SCHEMATRANDATA has been added by looking searching by Schema (Figure E-7).  To do this, click on the magnifying glass and provide the Schema name.
 
 Figure E-7:
 
-![](images/400/Lab400_image180.png) 
+![](images/400/Lab400_image480.png) 
  
 
 7.	Add the Protocol user.
@@ -400,7 +398,7 @@ As you did in Step 4, click the plus sign ( + ) next to the word Credentials.  T
 
 Figure E-8:
 
-![](images/400/Lab400_image190.png) 
+![](images/400/Lab400_image490.png) 
  
 
 For now, just leave this login alone.  It will be used in a later step. 
@@ -410,21 +408,21 @@ Navigate back to the Overview page of the Administration Server (Figure E-9).  T
 
 Figure E-9:
 
-![](images/400/Lab400_image200.png) 
+![](images/400/Lab400_image500.png) 
 
 
 After clicking the plus sign ( + ), you are taken to the Add Extract page (Figure E-10).  Here you can choose from three different types of Extracts.  You will be installing an Integrated Extract.  Click Next.
 
 Figure E-10:
 
-![](images/400/Lab400_image210.png) 
+![](images/400/Lab400_image510.png) 
 
 
 The next page of the Add Extract process, is to provide the basic information for the Extract. Items required have a star ( * ) next to them.  Provide the required information and then click Next (Figure E-11).  
 
 Figure E-11:
 
-![](images/400/Lab400_image220.png) 
+![](images/400/Lab400_image520.png) 
  
 
 On the last page of the Add Extract process, you are presented with a parameter file (Figure E-12).  The parameter file is partially filled out, but missing the TABLE parameters. Insert the following list of TABLE parameter values into the parameter file.
@@ -456,13 +454,13 @@ Once the TABLE statements are added, click Create and Run at the bottom of the p
 
 Figure E-12:
  
-![](images/400/Lab400_image230.png) 
+![](images/400/Lab400_image530.png) 
 
 The Administration Server page will refresh when the process is done registering the Extract with the database, and will show that the Extract is up and running (Figure E-13).
 
 Figure E-13:
  
-![](images/400/Lab400_image240.png) 
+![](images/400/Lab400_image540.png) 
 
 Lab F: Configure Uni-Directional Replication (Distribution Server)
 
@@ -476,37 +474,38 @@ Steps:
 
 Figure F-1:
 
-![](images/400/Lab400_image250.png) 
+![](images/400/Lab400_image550.png) 
 
 
 2.	Open the Distribution Server page for your first deployment (Figure F-2).
 
 Figure F-2:
 
-![](images/400/Lab400_image260.png) 
+![](images/400/Lab400_image560.png) 
 
 3.	Click the plus sign ( + ) to add a new Distribution Path (Figure F-3).
 
 Figure F-3:
 
-![](images/400/Lab400_image270.png) 
+![](images/400/Lab400_image570.png) 
 
 4.	On the Add Path page, fill in the required information (Figure F-4).  Make note that the default protocol for distribution service is secure websockets (wss).  You will need to change this to websockets (ws).
 
 Figure F-4:
 
-![](images/400/Lab400_image280.png) 
+![](images/400/Lab400_image580.png) 
 
 Notice the drop down with the values WS, WSS, UDT and OGG.  These are the protocols you can select to use for transport.  Since you are setting up an unsecure uni-directional replication, make sure you select WS, then provide the following target information:
-Hostname: ogg123rs
 
-Port: <2nd deployment’s receiver server port>
+Hostname: amersrvr
 
-Trail File: <any two letter value>
+Port: 16002
 
-Domain: <credential you created in the Admin Server for WS>
+Trail File: dd
 
-Alias: <credential you created in the Admin Server for WS>
+Domain: WSTARGET
+
+Alias: WSTARGET
 
 After filling out the form, click Create and Run at the bottom of the page.
 
@@ -514,7 +513,7 @@ After filling out the form, click Create and Run at the bottom of the page.
 
 Figure F-5:
  
-![](images/400/Lab400_image290.png) 
+![](images/400/Lab400_image590.png) 
 
 
 Lab G: Configure Uni-Directional Replication (Receiver Server)
@@ -525,56 +524,58 @@ In this lab, you will configure the Receiver Server for the target database, whi
 Time: 5 minutes
 
 Steps:
-1.	Start from the Service Manager page for your second deployment (Figure G-1).
+
+1.	Start from the Service Manager page for your first deployment (Figure G-1).
 
 Figure G-1:
  
-![](images/400/Lab400_image300.png) 
+![](images/400/Lab400_image600.png) 
 
 2.	Click on the Receiver Server link to open the Receiver Server page (Figure G-2).  Verify that everything is configured.
 
 Figure G-2:
 
-![](images/400/Lab400_image310.png) 
+![](images/400/Lab400_image610.png) 
 
 
 Lab H: Configure Uni-Directional Replication (Parallel Replicat)
 
 Object:
-In this lab you will configure the Parallel Replicat for the second deployment.
+In this lab you will configure the Parallel Replicat for the amer deployment.
 
 Time: 25 minutes
 
 Steps:
+
 1.	Starting from the Service Manager page (Figure H-1).
 
 Figure H-1:
  
-![](images/400/Lab400_image320.png) 
+![](images/400/Lab400_image620.png) 
  
 2.	Open the Administration Server for the second deployment by clicking on the link (Figure H-2).
 
 Figure H-2:
 
-![](images/400/Lab400_image330.png) 
+![](images/400/Lab400_image630.png) 
 
-3.	Open the Configuration option to add your credentials needed to connect to EURO (Figure H-3).  After creating the credential, login and verify that it works.
+3.	Open the Configuration option (Figure H-3).  
 
 Figure H-3:
  
-![](images/400/Lab400_image340.png) 
+![](images/400/Lab400_image640.png) 
 
 4. After Adding the credential you would need to create the checkpoint table 
 
 Figure H-4:
  
-![](images/400/Lab400_image390.png) 
+![](images/400/Lab400_image690.png) 
 
-5.	Navigate back to the Overview page on the Administration Server.  Here you will begin to create your Integrated Replicat (Figure H-5).  Click the plus sign ( + ) to open the Add Replicat process.
+5.	Navigate back to the Overview page on the Administration Server.  Here you will begin to create your Nonintegrated Parallel Replicat (Figure H-5).  Click the plus sign ( + ) to open the Add Replicat process.
 
 Figure H-5:
  
-![](images/400/Lab400_image350.png) 
+![](images/400/Lab400_image650.png) 
 
 
 6.	With the Add Replicat page open, you want to create a Nonintegrated Parallel Replicat.  Make sure the radio button is selected and click Next (Figure H-6).
@@ -588,33 +589,33 @@ Figure H-6:
 
 Figure H-7:
  
-![](images/400/Lab400_image370.png) 
+![](images/400/Lab400_image670.png) 
 
 8.	You are next taken to the Parameter File page.  On this page, you will notice that a sample parameter file is provided (Figure H-8).  You will have to remove the MAP statement and replace it with the information below:
 
 INSERTMISSINGUPDATES
 
-MAP PDB1.SOE.CUSTOMERS, TARGET SOE.CUSTOMERS, KEYCOLS (CUSTOMER_ID);                                                              
+MAP SOE.CUSTOMERS, TARGET SOE.CUSTOMERS, KEYCOLS (CUSTOMER_ID);                                                              
 
-MAP PDB1.SOE.ADDRESSES, TARGET SOE.ADDRESSES, KEYCOLS (ADDRESS_ID);                                                               
+MAP SOE.ADDRESSES, TARGET SOE.ADDRESSES, KEYCOLS (ADDRESS_ID);                                                               
 
-MAP PDB1.SOE.ORDERS, TARGET SOE.ORDERS, KEYCOLS (ORDER_ID);                                                                       
+MAP SOE.ORDERS, TARGET SOE.ORDERS, KEYCOLS (ORDER_ID);                                                                       
 
-MAP PDB1.SOE.ORDER_ITEMS, TARGET SOE.ORDER_ITEMS, KEYCOLS (ORDER_ID, LINE_ITEM_ID);                                               
+MAP SOE.ORDER_ITEMS, TARGET SOE.ORDER_ITEMS, KEYCOLS (ORDER_ID, LINE_ITEM_ID);                                               
 
-MAP PDB1.SOE.CARD_DETAILS, TARGET SOE.CARD_DETAILS, KEYCOLS (CARD_ID);
+MAP SOE.CARD_DETAILS, TARGET SOE.CARD_DETAILS, KEYCOLS (CARD_ID);
 
-MAP PDB1.SOE.LOGON, TARGET SOE.LOGON;                                                                                             
+MAP SOE.LOGON, TARGET SOE.LOGON;                                                                                             
 
-MAP PDB1.SOE.PRODUCT_INFORMATION, TARGET SOE.PRODUCT_INFORMATION;                                                                 
+MAP SOE.PRODUCT_INFORMATION, TARGET SOE.PRODUCT_INFORMATION;                                                                 
 
-MAP PDB1.SOE.INVENTORIES, TARGET SOE.INVENTORIES, KEYCOLS (PRODUCT_ID, WAREHOUSE_ID);
+MAP SOE.INVENTORIES, TARGET SOE.INVENTORIES, KEYCOLS (PRODUCT_ID, WAREHOUSE_ID);
 
-MAP PDB1.SOE.PRODUCT_DESCRIPTIONS, TARGET SOE.PRODUCT_DESCRIPTIONS;                                                               
+MAP SOE.PRODUCT_DESCRIPTIONS, TARGET SOE.PRODUCT_DESCRIPTIONS;                                                               
 
-MAP PDB1.SOE.WAREHOUSES, TARGET SOE.WAREHOUSES;                                                                                   
+MAP SOE.WAREHOUSES, TARGET SOE.WAREHOUSES;                                                                                   
 
-MAP PDB1.SOE.ORDERENTRY_METADATA, TARGET SOE.ORDERENTRY_METADATA;
+MAP SOE.ORDERENTRY_METADATA, TARGET SOE.ORDERENTRY_METADATA;
 
 Notes: ~/Desktop/Software/replicat.prm has these contents for copying.
 Once the parameter file has been updated, click the Create and Run button at the bottom.
