@@ -7,7 +7,7 @@ Update August 21, 2018
 
 This lab walk you through unidirectional and DDL replication between to database schemas using Goldengate 12.3 micro services web interface in a Ravello environment.
 
-![](images/600/Lab600_image104.png)
+![](images/600/Lab600_image105.png)
 
 This lab supports the following use cases:
 -	Migration of on-premise pluggable databases to a cloud based environment.
@@ -54,7 +54,7 @@ Note: You will be required to login again.  Use the same Administrator account t
 
 Figure 7a-2:
 
-![](images/600/Lab600_image120.png) 
+![](images/600/Lab600_image120.png)
  
 
 3.	Before you can create an Extract, you need to setup a credential alias for the GoldenGate user (C##GGATE).  This is done from the Configuration menu option in the grey bar on the left of the screen (Figure 7a-3).
