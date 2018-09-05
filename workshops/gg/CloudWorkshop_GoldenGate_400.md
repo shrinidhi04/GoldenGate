@@ -16,7 +16,8 @@ This lab supports the following use cases:
 ## Objectives
 
 -   Set up bidirection replication between two databases i.e. AMER DB and EURO DB
--   Set up auto conflict detaction and resolution.
+-   Set up auto conflict detaction and resolution. And to set up we need to log in to both the databases and run the below PL/SQL
+for all the tables - EXEC DBMS_GOLDENGATE_ADM.ADD_AUTO_CDR(schema_name => 'xxxxxx',table_name  => 'xxxxxxx');
 
 ## Required Artifacts
 
@@ -126,27 +127,17 @@ Figure A-11:
 
 On the last page of the Add Extract process, you are presented with a parameter file (Figure A-12).  The parameter file is partially filled out, but missing the TABLE parameters. Insert the following list of TABLE parameter values into the parameter file.
 
-TABLE SOE.ADDRESSES;                                                                                                              
+TRANLOGOPTIONS EXCLUDETAG 123
 
-TABLE SOE.CUSTOMERS;                                                                                                              
+TABLE AMER.TITLE;                                                                                                              
 
-TABLE SOE.ORDERS;                                                                                                                 
+TABLE AMER.PUBLISHER; 
 
-TABLE SOE.ORDER_ITEMS;                                                                                                            
+TABLE AMER.AUTHOR;                                                                                                                
 
-TABLE SOE.CARD_DETAILS; 
+TABLE AMER.ADDRESS;                                                                                                            
 
-TABLE SOE.LOGON;                                                                                                                  
-
-TABLE SOE.PRODUCT_INFORMATION;                                                                                                    
-
-TABLE SOE.INVENTORIES;                                                                                                            
-
-TABLE SOE.PRODUCT_DESCRIPTIONS;                                                                                                   
-
-TABLE SOE.WAREHOUSES;                                                                                                             
-
-TABLE SOE.ORDERENTRY_METADATA; 
+TABLE AMER.TITLE_AUTHOR; 
 
 Notes: ~/Desktop/Software/extract.prm has these contents for copying.
 Once the TABLE statements are added, click Create and Run at the bottom of the page.
@@ -290,29 +281,17 @@ Figure D-7:
 
 8.	You are next taken to the Parameter File page.  On this page, you will notice that a sample parameter file is provided (Figure D-8).  You will have to remove the MAP statement and replace it with the information below:
 
-INSERTMISSINGUPDATES
+DBOPTIONS SETTAG 123
 
-MAP SOE.CUSTOMERS, TARGET SOE.CUSTOMERS, KEYCOLS (CUSTOMER_ID);                                                              
+MAPINVISIBLECOLUMNS
 
-MAP SOE.ADDRESSES, TARGET SOE.ADDRESSES, KEYCOLS (ADDRESS_ID);                                                               
+MAP AMER.TITLE, TARGET EURO.TITLE;                                                                                                              
+MAP AMER.PUBLISHER, TARGET EURO.PUBLISHER; 
 
-MAP SOE.ORDERS, TARGET SOE.ORDERS, KEYCOLS (ORDER_ID);                                                                       
+MAP AMER.AUTHOR, TARGET EURO.AUTHOR;                                                                                                             
+MAP AMER.ADDRESS, TARGET EURO.ADDRESS;                                                                                                            
+MAP AMER.TITLE_AUTHOR, TARGET EURO.TITLE_AUTHOR;  
 
-MAP SOE.ORDER_ITEMS, TARGET SOE.ORDER_ITEMS, KEYCOLS (ORDER_ID, LINE_ITEM_ID);                                               
-
-MAP SOE.CARD_DETAILS, TARGET SOE.CARD_DETAILS, KEYCOLS (CARD_ID);
-
-MAP SOE.LOGON, TARGET SOE.LOGON;                                                                                             
-
-MAP SOE.PRODUCT_INFORMATION, TARGET SOE.PRODUCT_INFORMATION;                                                                 
-
-MAP SOE.INVENTORIES, TARGET SOE.INVENTORIES, KEYCOLS (PRODUCT_ID, WAREHOUSE_ID);
-
-MAP SOE.PRODUCT_DESCRIPTIONS, TARGET SOE.PRODUCT_DESCRIPTIONS;                                                               
-
-MAP SOE.WAREHOUSES, TARGET SOE.WAREHOUSES;                                                                                   
-
-MAP SOE.ORDERENTRY_METADATA, TARGET SOE.ORDERENTRY_METADATA;
 
 Notes: ~/Desktop/Software/replicat.prm has these contents for copying.
 Once the parameter file has been updated, click the Create and Run button at the bottom.
@@ -427,27 +406,17 @@ Figure E-11:
 
 On the last page of the Add Extract process, you are presented with a parameter file (Figure E-12).  The parameter file is partially filled out, but missing the TABLE parameters. Insert the following list of TABLE parameter values into the parameter file.
 
-TABLE SOE.ADDRESSES;                                                                                                              
+TRANLOGOPTIONS EXCLUDETAG 123
 
-TABLE SOE.CUSTOMERS;                                                                                                              
+TABLE EURO.TITLE;                                                                                                              
 
-TABLE SOE.ORDERS;                                                                                                                 
+TABLE EURO.PUBLISHER; 
+                                                                                                             
+TABLE EURO.AUTHOR;                                                                                                                
 
-TABLE SOE.ORDER_ITEMS;                                                                                                            
+TABLE EURO.ADDRESS;                                                                                                            
 
-TABLE SOE.CARD_DETAILS; 
-
-TABLE SOE.LOGON;                                                                                                                  
-
-TABLE SOE.PRODUCT_INFORMATION;                                                                                                    
-
-TABLE SOE.INVENTORIES;                                                                                                            
-
-TABLE SOE.PRODUCT_DESCRIPTIONS;                                                                                                   
-
-TABLE SOE.WAREHOUSES;                                                                                                             
-
-TABLE SOE.ORDERENTRY_METADATA; 
+TABLE EURO.TITLE_AUTHOR; 
 
 Notes: ~/Desktop/Software/extract.prm has these contents for copying.
 Once the TABLE statements are added, click Create and Run at the bottom of the page.
@@ -593,36 +562,23 @@ Figure H-7:
 
 8.	You are next taken to the Parameter File page.  On this page, you will notice that a sample parameter file is provided (Figure H-8).  You will have to remove the MAP statement and replace it with the information below:
 
-INSERTMISSINGUPDATES
+DBOPTIONS SETTAG 123
 
-MAP SOE.CUSTOMERS, TARGET SOE.CUSTOMERS, KEYCOLS (CUSTOMER_ID);                                                              
+MAPINVISIBLECOLUMNS
 
-MAP SOE.ADDRESSES, TARGET SOE.ADDRESSES, KEYCOLS (ADDRESS_ID);                                                               
+MAP EURO.TITLE, TARGET AMER.TITLE;                                                                                                           
+MAP EURO.PUBLISHER, TARGET AMER.PUBLISHER; 
 
-MAP SOE.ORDERS, TARGET SOE.ORDERS, KEYCOLS (ORDER_ID);                                                                       
-
-MAP SOE.ORDER_ITEMS, TARGET SOE.ORDER_ITEMS, KEYCOLS (ORDER_ID, LINE_ITEM_ID);                                               
-
-MAP SOE.CARD_DETAILS, TARGET SOE.CARD_DETAILS, KEYCOLS (CARD_ID);
-
-MAP SOE.LOGON, TARGET SOE.LOGON;                                                                                             
-
-MAP SOE.PRODUCT_INFORMATION, TARGET SOE.PRODUCT_INFORMATION;                                                                 
-
-MAP SOE.INVENTORIES, TARGET SOE.INVENTORIES, KEYCOLS (PRODUCT_ID, WAREHOUSE_ID);
-
-MAP SOE.PRODUCT_DESCRIPTIONS, TARGET SOE.PRODUCT_DESCRIPTIONS;                                                               
-
-MAP SOE.WAREHOUSES, TARGET SOE.WAREHOUSES;                                                                                   
-
-MAP SOE.ORDERENTRY_METADATA, TARGET SOE.ORDERENTRY_METADATA;
+MAP EURO.AUTHOR, TARGET AMER.AUTHOR;                                                                                                                
+MAP EURO.ADDRESS, TARGET AMER.ADDRESS;                                                                                                            
+MAP EURO.TITLE_AUTHOR, TARGET AMER.TITLE_AUTHOR;  
 
 Notes: ~/Desktop/Software/replicat.prm has these contents for copying.
 Once the parameter file has been updated, click the Create and Run button at the bottom.
 
 Figure H-8:
  
-![](images/400/Lab400_image380.png) 
+![](images/400/Lab400_image680.png) 
 
 At this point, you should have a fully functional uni-directional replication environment. You can start Swingbench and begin testing.  See Appendix A for further instructions.
 
