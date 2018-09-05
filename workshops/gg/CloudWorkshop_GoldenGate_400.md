@@ -18,8 +18,7 @@ This lab supports the following use cases:
 -   Set up bidirection replication between two databases i.e. AMER DB and EURO DB
 -   Set up auto conflict detaction and resolution. And to set up we need to log in to both the databases and run the below PL/SQL
 for all the tables - 
-
-#EXEC DBMS_GOLDENGATE_ADM.ADD_AUTO_CDR(schema_name => 'xxxxxx',table_name  => 'xxxxxxx');
+      EXEC DBMS_GOLDENGATE_ADM.ADD_AUTO_CDR(schema_name => 'xxxxxx',table_name  => 'xxxxxxx');
 
 ## Required Artifacts
 
