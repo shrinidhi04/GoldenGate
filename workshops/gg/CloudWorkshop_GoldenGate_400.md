@@ -582,7 +582,7 @@ Figure H-8:
  
 ![](images/400/Lab400_image680.png) 
 
-At this point, you should have a fully functional bi-directional replication environment. You can start begin testing.
+At this point, you should have a fully functional bi-directional replication environment. You can start testing.
 
 
 
