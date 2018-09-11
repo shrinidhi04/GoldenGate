@@ -302,7 +302,7 @@ Figure D-8:
  
 ![](images/400/Lab400_image380.png) 
 
-At this point, you should have a fully functional uni-directional replication environment. You can start Swingbench and begin testing.  See Appendix A for further instructions.
+At this point, you should have a fully functional uni-directional replication environment. You can start testing.
 
 
 Lab E: Configure Uni-Directional Replication from EURO DB to AMER DB (Integrated Extract)
@@ -582,7 +582,7 @@ Figure H-8:
  
 ![](images/400/Lab400_image680.png) 
 
-At this point, you should have a fully functional uni-directional replication environment. You can start Swingbench and begin testing.  See Appendix A for further instructions.
+At this point, you should have a fully functional bi-directional replication environment. You can start begin testing.
 
 
 
