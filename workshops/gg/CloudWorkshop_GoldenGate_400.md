@@ -36,9 +36,9 @@ Steps:
 1.	Open Firefox and login to the Service Manager using the Administrator account you setup during deployment (Figure A-1). Port number will vary depending on what you used during setup.
 
 For Ravello Environment - 
-http://<dns url>:8890 or
+http://dns url:8890 or
 http://localhost:8890 or
-http://<Private IP>:8890
+http://Private IP:8890
 
 
 Figure A-1:
@@ -318,9 +318,9 @@ Steps:
 1.	Open Firefox and login to the Service Manager using the Administrator account you setup during deployment (Figure E-1). Port number will vary depending on what you used during setup.
 
 For Ravello Environment - 
-http://<dns url>:8890 or
+http://dns url:8890 or
 http://localhost:8890 or
-http://<Private IP>:8890
+http://Private IP:8890
 
 
 Figure E-1:
