@@ -141,6 +141,8 @@ TABLE AMER.ADDRESS;
 
 TABLE AMER.TITLE_AUTHOR; 
 
+TABLE AMER.SRC_CUSTOMER;
+
 Notes: ~/Desktop/Software/extract.prm has these contents for copying.
 Once the TABLE statements are added, click Create and Run at the bottom of the page.
 
@@ -294,6 +296,7 @@ MAP AMER.AUTHOR, TARGET EURO.AUTHOR;
 MAP AMER.ADDRESS, TARGET EURO.ADDRESS;                                                                                                            
 MAP AMER.TITLE_AUTHOR, TARGET EURO.TITLE_AUTHOR;  
 
+MAP AMER.SRC_CUSTOMER, TARGET EURO.SRC_CUSTOMER;
 
 Notes: ~/Desktop/Software/replicat.prm has these contents for copying.
 Once the parameter file has been updated, click the Create and Run button at the bottom.
@@ -419,6 +422,8 @@ TABLE EURO.AUTHOR;
 TABLE EURO.ADDRESS;                                                                                                            
 
 TABLE EURO.TITLE_AUTHOR; 
+
+TABLE EURO.SRC_CUSTOMER; 
 
 Notes: ~/Desktop/Software/extract.prm has these contents for copying.
 Once the TABLE statements are added, click Create and Run at the bottom of the page.
@@ -575,6 +580,8 @@ MAP EURO.AUTHOR, TARGET AMER.AUTHOR;
 MAP EURO.ADDRESS, TARGET AMER.ADDRESS;                                                                                                            
 MAP EURO.TITLE_AUTHOR, TARGET AMER.TITLE_AUTHOR;  
 
+MAP EURO.SRC_CUSTOMER, TARGET AMER.SRC_CUSTOMER; 
+
 Notes: ~/Desktop/Software/replicat.prm has these contents for copying.
 Once the parameter file has been updated, click the Create and Run button at the bottom.
 
@@ -585,5 +592,29 @@ Figure H-8:
 At this point, you should have a fully functional bi-directional replication environment. You can start testing.
 
 
+Lab I: Testing the Auto CDR with data
 
+Object:
+In this lab we will load few records in SRC_CUSTOMER table and test AUTO CDR.
+
+Time: 15 minutes
+
+Steps:
+
+1.	In this lab we inserted 1 record each on SRC_CUSTOMER table from AMER DB and EURO DB. We can see the stats in (Figure I-1) & (Figure I-2)
+
+Figure I-1:
+ 
+![](images/400/Lab400_image700.png) 
+
+Figure I-2:
+ 
+![](images/400/Lab400_image710.png) 
+
+
+2.	After this we will try to insert the same record on both AMER DB and EURO DB to test the AUTO CDR. Here we are using a DB-Link and a procedure to load same records on both the DB's. 
+
+Figure I-3:
+
+![](images/400/Lab400_image720.png) 
 
