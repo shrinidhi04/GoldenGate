@@ -1,226 +1,91 @@
-![](images/500/Lab500_image100.PNG)
+![](images/900/Lab900_image100.PNG)
 
-## CONNECT AND INTERACT WITH ADMINCLIENT
-## Introduction
-
-In this lab, you will take a look at how to connect and interact with the Microservices AdminClient. using Goldengate 12.3 micro services web interface in a Ravello environment.
-
-
-Steps:
-1. Open a command terminal
-Right mouse click -> Open Terminal
-
-![](images/500/Lab500_image101.PNG)
-
-![](images/500/Lab500_image102.PNG)
-
-2. Navigate to the Oracle GoldenGate 12.3 binary directory
-cd /opt/app/oracle/product/12.3.0.1/oggcore_1/bin
-
-![](images/500/Lab500_image103.PNG)
-
-3. Start the AdminClient
-./adminclient
-
-![](images/500/Lab500_image104.PNG)
-
-4. Connect to Oracle GoldenGate without a deployment
-
-OGG 1> connect http://hostname:16000 as oggadmin password welcome1
-
-![](images/500/Lab500_image105.PNG)
-
-Notice that you are not connected and that AdminClient provides you a list of deployment you can attempt to connect to.
-
-5. Connect to an Oracle GoldenGate deployment
-
-OGG 2> connect http://hostname:16000 deployment Atlanta_1 as oggadmin password welcome1
-
-![](images/500/Lab500_image106.PNG)
-
-6. Perform an “info all” command and other GoldenGate commands to see what
-AdminClient can do
-
-OGG Atlanta_1 3> info all
-
-![](images/500/Lab500_image107.PNG)
-
-Note: checkout the RLWRAP function as well (arrow up and down while in AdminClient)
-
-
-At this point, you should have a fully functional Admin Client environment. 
-
-
-![](images/500/Lab502_image100.PNG)
+Update January 14, 2019
 
 ## Working with REST API
 ## Introduction
 
-In this lab, you will take a look at how to pull a list of services from Oracle GoldenGate using the REST APIs. Replace <port> with the port number of the service you want to access.
+In this lab, you will take a look at how to pull a list of services from Oracle GoldenGate using the REST APIs (Curl Commands). 
 
 Steps:
-1. Open a command window (right mouse click – Open Terminal)
+1. Open a command window (Right mouse click – Open Terminal)
 
-2. Try running the following CURL command
+2. Create a json file for building an integrated   extract .
 
+![](images/2019/extract_add.PNG)
+
+3. Start the change-capture extract using the Curl Command, which would start the extract with begin-now option.
+
+![](images/2019/2.PNG)
+
+4. After the command is executed successfully, the command output looks like this:
+
+![](images/2019/3.PNG)
+
+![](images/2019/4.PNG)
+
+5. On the Goldengate Microservices Console, under the Admin Server you can see the Extract has been started and running .
+
+![](images/2019/4.PNG)
+
+6. A path needs to be  created to send the transaction of data from the Extract to the Replicat. You can create a new path by adding configuration  in JSON file.
+
+![](images/2019/5.PNG)
+
+7. You can execute the following curl command to add the PATH to send data from Extract to replicat.
+
+![](images/2019/6.PNG)
+
+8. Once the command is executed successfully, you can check on Goldengate Microservices Web Console under Distribution Server for the PATH created  and its Running Status.
+
+![](images/2019/7.PNG)
+
+9. Next Step is to configure replicat on target which can be done by specifying the various configuration parameters for the Replicat in a JSON file as shown below:
+
+![](images/2019/8.PNG)
+
+10. In this Step, You just need to configure and create the Replicat and do not start it (we will Start it at specific CSN after the export/import Job is done). Using the curl command we can add the replicat.
+
+![](images/2019/9.PNG)
+
+11. Now it is time to get the current scn of the source database .So that all the  transactions after this particular CSN are only captured & Replicated (i.e we have to capture only those transactions that occur after the export Job)
+
+SQL> select current_scn from v$database;
+
+12. We need to create a JSON file to alter the Change-Capture Replicat at a particular CSN.
+
+![](images/2019/10.PNG)
+
+13. We finally need to start the replicat after the Export/import Job has finished successfully on target.We use the following Curl command to start the replicat, which refers to the JSON file created in last step.
+
+![](images/2019/11.PNG)
+
+14. Once the command is executed successfully you can crosscheck the status of the Replicat on Goldengate Microservices Web Console under the Admin Server of the Target.
+
+![](images/2019/12.PNG)
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+Try running the following CURL command.
 curl -u oggadmin:welcome1 -H "Content-Type: application/json" -H "Accept:
-application/json" -X GET http://hostname:<port>/services/v2/deployments/SanFran_1/services/distsrvr/logs |
+application/json" -X GET
+http://localhost:<port>/services/v2/deployments/SanFran_1/services/distsrvr/logs |
 python -mjson.tool
 
 3. Retrieve Log locations using the following CURL command
-
 curl -u oggadmin:welcome1 -H "Content-Type:application/json" -H
-"Accept:application/json" -X GET http://hostname:<port>/services/v2/logs | python - mjson.tool
+"Accept:application/json" -X GET http://localhost:<port>/services/v2/logs | python - mjson.tool
 
-![](images/502/Lab502_image101.png)
+![](images/800/Lab800_image101.png)
 
-Appendix:
-
-A: Run Swingbench
-Steps:
-1. Open a command terminal and navigate to the Swingbench bin directory
-
-cd /opt/app/oracle/product/swingbench/bin
-![](images/500/Lab502_image102.PNG)
-
-2. Execute the swingbench command
-
-./swingbench
-![](images/500/Lab502_image103.PNG)
-
-3. Once Swingbench starts, select the SOE_Server_Side_V2 configuration file.
-
-![](images/500/Lab502_image104.PNG)
-
-4. Once Swingbench is open, update Password, Connect String, Benchmark and Run Time:
-
-Password: welcome1 --
-Connect String: //hostname/pdb1 --
-Benchmark Run Time: 10 mins
-
-adjust parameters for generating records
-
-![](images/500/Lab502_image105.PNG)
-
-5. Execute Swingbench
-
-![](images/500/Lab502_image106.PNG)
-
-
-At this point you should see activity on the table by looking at the Extract/Replicats.
-Correct any problems that may arise due.
-
-At this point, you should have a fully functional REST Api environment. 
-
-
-![](images/500/Lab503_image100.PNG)
-
-## Working with mySQL
-## Introduction
-
-In this lab, you will take a look at how to pull a list of services from Oracle GoldenGate using mySQL.
-
-Steps:
-
-Set up Goldengate Extract on the source MYSQL DB
-
-1.	Connecting to ravello instance from putty , Once you start the MYSQL instance IP address will appear
-
-![](images/500/Lab503_image101.PNG)
-
-2.	You would need the private key file to connect the instance
-
-![](images/500/Lab503_image102.png)
-
-3.	Load the private key in the putty
-
-![](images/500/Lab503_image103.PNG)
-
-4.	Log in as user ‘ravello’
-
-![](images/500/Lab503_image104.PNG)
-
-5.	Golden gate instance is already installed and set up for the MYSQL DB in /opt/gg4mysql/
-
-![](images/500/Lab503_image105.PNG)
-
-6.	Both extract and pump process is already been set up. You need to add the remote host ip address in the PUMP parameter file. You can find the remote host ip from the EURO instance and the MGRPORT would be target receiver server port
-
-![](images/500/Lab503_image106.PNG)
-
-7.	You can load the test tables with the below scrip in the location /home/ravello/sql
-
-
-![](images/500/Lab503_image107.PNG)
-
-8.	Once you load the table check the stats of the extract
-
-![](images/500/Lab503_image108.PNG)
-
-9.	On the target EURO instance make sure all the processes are running 
-
-![](images/500/Lab503_image109.PNG)
-
-10. If you check in receiver server there will not be any paths before you start the pump on the source side.
-
-![](images/500/Lab503_image110.png)
-
-11.	Once the pump is started on the source side you will see a path created
-
-![](images/500/Lab503_image111.png)
-
-12.	You can check the trail files on the system as well
-![](images/500/Lab503_image112.PNG)
-
-13.	Now go to administrative server CONFIGURATION tab
-
-![](images/500/Lab503_image113.png)
-
-14.	You can add DB credentials there which will be used by Replicat process
-![](images/500/Lab503_image114.PNG)
-
-15.	Now connect to DB with the credential created
-
-![](images/500/Lab503_image115.PNG)
-
-16.	Then you can create a checkpoint table in the DB
-
-![](images/500/Lab503_image116.PNG)
-
-17.	Now go to Overview tab to create the replicat
-
-![](images/500/Lab503_image117.PNG)
-
-18.	Select the type of the replicat
-
-![](images/500/Lab503_image118.PNG)
-
-19.	Complete all the details
-
-![](images/500/Lab503_image119.png)
-
-20.	You can manually change the parameter file before creating
-
-![](images/500/Lab503_image120.png)
-
-21.	Once created 
-
-![](images/500/Lab503_image121.png)
-
-22.	You can check the statistic
-
-![](images/500/Lab503_image122.png)
-
-23.	You can log in to Database and check the counts
-
-![](images/500/Lab503_image123.png)
-
-24.	connecting to GG Admin client will require the same private key 
-
-![](images/500/Lab503_image124.png)
-
-25.	you can check the same stats of replicat remotely from the admin client
-
-![](images/500/Lab503_image125.png)
-
-![](images/500/Lab503_image125a.png)
